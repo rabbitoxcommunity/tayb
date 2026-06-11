@@ -50,15 +50,6 @@ function Counter({ target, suffix, prefix }) {
 export default function Stats() {
   return (
     <section className="relative overflow-hidden bg-[#f84d07] py-20">
-      {/* subtle grid overlay */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage:
-            'linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px)',
-          backgroundSize: '20vw 20vw',
-        }}
-      />
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">

@@ -3,11 +3,22 @@ import SplitText from '../animations/SplitText'
 import BlurText from '../animations/BlurText'
 import RevealText from '../animations/RevealText'
 
-const milestones = [
-  { year: '2009', event: 'Founded in Dubai with a 5-person team' },
-  { year: '2014', event: 'Expanded to Europe — first London project delivered' },
-  { year: '2019', event: 'Achieved ISO 9001 & LEED accreditation' },
-  { year: '2024', event: '50+ projects completed across 12 countries' },
+const pillars = [
+  {
+    label: 'Our Vision',
+    heading: 'Building a Better World',
+    body: 'To be the world\'s most trusted construction partner — delivering landmarks that stand for generations and communities that thrive for centuries.',
+  },
+  {
+    label: 'Our Mission',
+    heading: 'Precision at Every Stage',
+    body: 'To deliver innovative, sustainable construction through expert craftsmanship, rigorous safety standards, and technology-driven processes — on time and within budget.',
+  },
+  {
+    label: 'Our Values',
+    heading: 'Integrity Above All',
+    body: 'Integrity, excellence, and collaboration form the foundation of everything we do. We build trust with clients, partners, and communities through transparent action and consistent results.',
+  },
 ]
 
 function fadeUp(delay = 0) {
@@ -22,56 +33,47 @@ function fadeUp(delay = 0) {
 export default function About() {
   return (
     <section className="relative bg-white py-20 lg:py-28 overflow-hidden">
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage: 'linear-gradient(rgba(0,0,0,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.07) 1px, transparent 1px)',
-          backgroundSize: '20vw 20vw',
-        }}
-      />
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
 
-        {/* Section label — RevealText */}
-        <div className="mb-4">
-          <RevealText>
-            <p className="text-sm font-semibold tracking-widest uppercase text-[#f84d07]">
-              Who We Are
-            </p>
-          </RevealText>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-20">
+        {/* Who We Are — top section */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-16 lg:gap-20 items-start mb-20">
 
           {/* Left */}
           <div>
-            {/* Heading — SplitText */}
-            <h2 className="text-4xl sm:text-5xl font-black text-gray-900 leading-tight uppercase mb-6">
+            <RevealText>
+              <p className="text-[10px] font-bold tracking-[0.26em] uppercase text-[#f84d07] mb-8">
+                Who We Are
+              </p>
+            </RevealText>
+
+            <h2 className="text-5xl sm:text-6xl font-black text-gray-900 leading-[1.0] tracking-tight uppercase mb-10">
               <SplitText text="Global Builder &" stagger={0.025} duration={0.5} />
               <br />
               <SplitText text="Construction Partner" stagger={0.025} duration={0.5} delay={0.35} />
             </h2>
 
-            {/* Body — BlurText */}
-            <p className="text-gray-500 leading-relaxed mb-6">
-              <BlurText
-                text="Founded in 2009, BuildLine has grown from a regional contractor into a globally recognised construction partner. With expertise spanning residential towers, commercial complexes, and critical infrastructure, we bring precision and craftsmanship to every project."
-                stagger={0.04}
-                duration={0.55}
-              />
-            </p>
-            <p className="text-gray-500 leading-relaxed mb-8">
-              <BlurText
-                text="Our multidisciplinary teams operate across 12 countries, combining local regulatory knowledge with internationally certified processes to deliver on time, every time."
-                stagger={0.04}
-                duration={0.55}
-                delay={0.2}
-              />
-            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
+              <p className="text-sm text-gray-400 leading-relaxed">
+                <BlurText
+                  text="Founded in 2009, BuildLine has grown from a regional contractor into a globally recognized construction partner across 12 countries."
+                  stagger={0.035}
+                  duration={0.5}
+                />
+              </p>
+              <p className="text-sm text-gray-400 leading-relaxed">
+                <BlurText
+                  text="We combine local regulatory knowledge with internationally certified processes to deliver every project on time and within budget."
+                  stagger={0.035}
+                  duration={0.5}
+                  delay={0.15}
+                />
+              </p>
+            </div>
 
             <motion.div {...fadeUp(0.4)}>
               <a
                 href="#contact"
-                className="inline-flex items-center gap-3 rounded-full bg-[#f84d07] px-7 py-3.5 text-sm font-semibold text-white hover:bg-[#d94206] transition-colors shadow group"
+                className="inline-flex items-center gap-3 rounded-full bg-[#f84d07] px-7 py-3.5 text-sm font-semibold text-white hover:bg-[#d94206] transition-colors group"
               >
                 Work With Us
                 <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white">
@@ -83,56 +85,67 @@ export default function About() {
             </motion.div>
           </div>
 
-          {/* Right — image collage */}
+          {/* Right — single tall image */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-8%' }}
-            transition={{ duration: 0.8, ease: [0.215, 0.61, 0.355, 1] }}
-            className="relative grid grid-cols-2 gap-4 h-[360px] sm:h-[420px]"
+            transition={{ duration: 0.9, ease: [0.215, 0.61, 0.355, 1] }}
+            className="rounded-2xl overflow-hidden"
+            style={{ height: '480px' }}
           >
-            <div className="rounded-2xl overflow-hidden row-span-2">
-              <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=500&h=700&fit=crop&q=80" alt="Construction site" className="h-full w-full object-cover" />
-            </div>
-            <div className="rounded-2xl overflow-hidden">
-              <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=500&h=300&fit=crop&q=80" alt="Engineers planning" className="h-full w-full object-cover" />
-            </div>
-            <div className="rounded-2xl overflow-hidden">
-              <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=500&h=300&fit=crop&q=80" alt="Building exterior" className="h-full w-full object-cover" />
-            </div>
-
-            {/* Floating badge */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8, y: 10 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5, duration: 0.5, type: 'spring', stiffness: 200 }}
-              className="absolute -bottom-4 -left-4 rounded-2xl bg-[#f84d07] px-6 py-4 shadow-xl"
-            >
-              <p className="text-3xl font-black text-white">15+</p>
-              <p className="text-xs text-white/80 font-medium">Years of expertise</p>
-            </motion.div>
+            <img
+              src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=960&fit=crop&q=80"
+              alt="Construction site"
+              className="h-full w-full object-cover"
+            />
           </motion.div>
         </div>
 
-        {/* Timeline */}
-        <div className="border-t border-gray-100 pt-14">
-          <motion.p {...fadeUp()} className="text-xs font-semibold tracking-widest uppercase text-gray-400 mb-8">
-            Our Journey
-          </motion.p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {milestones.map((m, i) => (
+        {/* Vision / Mission / Values — asymmetric grid */}
+        <div className="mt-16 grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-3">
+
+          {/* Vision — large left cell */}
+          <motion.div
+            {...fadeUp(0)}
+            className="bg-gray-50 rounded-2xl p-10 flex flex-col justify-between min-h-[300px] lg:min-h-[360px]"
+          >
+            <p className="text-[10px] font-bold tracking-[0.26em] uppercase text-[#f84d07]">
+              {pillars[0].label}
+            </p>
+            <div>
+              <h3 className="text-3xl sm:text-4xl font-black text-gray-900 leading-tight mb-4">
+                {pillars[0].heading}
+              </h3>
+              <p className="text-sm text-gray-400 leading-relaxed max-w-sm">
+                {pillars[0].body}
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Mission + Values — stacked right column */}
+          <div className="flex flex-col gap-3">
+            {pillars.slice(1).map((p, i) => (
               <motion.div
-                key={i}
-                {...fadeUp(i * 0.1)}
-                className="relative pl-5 border-l-2 border-[#f84d07]/30"
+                key={p.label}
+                {...fadeUp((i + 1) * 0.1)}
+                className="bg-gray-50 rounded-2xl p-8 flex-1 flex flex-col justify-between"
               >
-                <span className="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full bg-[#f84d07]" />
-                <p className="text-lg font-black text-[#f84d07] mb-1">{m.year}</p>
-                <p className="text-sm text-gray-600 leading-snug">{m.event}</p>
+                <p className="text-[10px] font-bold tracking-[0.26em] uppercase text-[#f84d07] mb-4">
+                  {p.label}
+                </p>
+                <div>
+                  <h3 className="text-xl font-black text-gray-900 leading-snug mb-3">
+                    {p.heading}
+                  </h3>
+                  <p className="text-sm text-gray-400 leading-relaxed">
+                    {p.body}
+                  </p>
+                </div>
               </motion.div>
             ))}
           </div>
+
         </div>
       </div>
     </section>

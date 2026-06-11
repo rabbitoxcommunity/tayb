@@ -23,13 +23,6 @@ export default function Projects({ preview = false }) {
 
   return (
     <section className="relative bg-white py-20 lg:py-28">
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage: 'linear-gradient(rgba(0,0,0,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.07) 1px, transparent 1px)',
-          backgroundSize: '20vw 20vw',
-        }}
-      />
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
 
         {/* Header */}

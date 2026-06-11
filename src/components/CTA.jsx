@@ -12,14 +12,6 @@ export default function CTA() {
         aria-hidden="true"
         className="absolute inset-0 h-full w-full object-cover opacity-20"
       />
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage:
-            'linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)',
-          backgroundSize: '20vw 20vw',
-        }}
-      />
 
       <div className="relative mx-auto max-w-4xl px-5 sm:px-6 lg:px-8 text-center">
         <div className="flex justify-center mb-4">

@@ -3,7 +3,6 @@ import PageHero from '../components/PageHero'
 import Stats from '../components/Stats'
 import Process from '../components/Process'
 import Team from '../components/Team'
-import Testimonials from '../components/Testimonials'
 import CTA from '../components/CTA'
 import SplitText from '../animations/SplitText'
 import BlurText from '../animations/BlurText'
@@ -193,7 +192,6 @@ export default function AboutPage() {
       <Stats />
       <Team />
       <Process />
-      <Testimonials />
       <CTA />
     </>
   )

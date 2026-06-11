@@ -6,9 +6,6 @@ import BlurText from '../animations/BlurText'
 export default function PageHero({ label, title, subtitle, image, breadcrumb }) {
   return (
     <section className="relative min-h-[52vh] flex items-end overflow-hidden hero-gradient">
-      {/* Grid overlay */}
-      <div className="absolute inset-0 grid-overlay pointer-events-none" />
-
       {/* Optional background image */}
       {image && (
         <motion.img
