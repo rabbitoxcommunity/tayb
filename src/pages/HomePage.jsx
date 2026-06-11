@@ -3,8 +3,6 @@ import About from '../components/About'
 import Services from '../components/Services'
 import Stats from '../components/Stats'
 import Projects from '../components/Projects'
-import CTA from '../components/CTA'
-
 export default function HomePage() {
   return (
     <>
@@ -13,7 +11,6 @@ export default function HomePage() {
       <Services />
       <Stats />
       <Projects preview />
-      <CTA />
     </>
   )
 }

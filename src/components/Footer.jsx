@@ -52,7 +52,7 @@ export default function Footer() {
     <footer className="bg-white text-gray-900">
 
       {/* Orange top rule */}
-      <div className="h-[3px] bg-[#f84d07]" />
+      <div className="h-[1px] bg-[#e3e3e3]" />
 
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
 

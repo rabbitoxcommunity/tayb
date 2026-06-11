@@ -102,50 +102,30 @@ export default function About() {
           </motion.div>
         </div>
 
-        {/* Vision / Mission / Values — asymmetric grid */}
-        <div className="mt-16 grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-3">
-
-          {/* Vision — large left cell */}
-          <motion.div
-            {...fadeUp(0)}
-            className="bg-gray-50 rounded-2xl p-10 flex flex-col justify-between min-h-[300px] lg:min-h-[360px]"
-          >
-            <p className="text-[10px] font-bold tracking-[0.26em] uppercase text-[#f84d07]">
-              {pillars[0].label}
-            </p>
-            <div>
-              <h3 className="text-3xl sm:text-4xl font-black text-gray-900 leading-tight mb-4">
-                {pillars[0].heading}
-              </h3>
-              <p className="text-sm text-gray-400 leading-relaxed max-w-sm">
-                {pillars[0].body}
+        {/* Vision / Mission / Values */}
+        <div className="mt-16 border-t border-gray-100">
+          {pillars.map((p, i) => (
+            <motion.div
+              key={p.label}
+              {...fadeUp(i * 0.1)}
+              className="grid grid-cols-1 md:grid-cols-[200px_1fr_1.2fr] gap-6 md:gap-12 py-10 border-b border-gray-100 group"
+            >
+              {/* Label */}
+              <p className="text-[10px] font-bold tracking-[0.26em] uppercase text-[#f84d07] md:pt-1">
+                {p.label}
               </p>
-            </div>
-          </motion.div>
 
-          {/* Mission + Values — stacked right column */}
-          <div className="flex flex-col gap-3">
-            {pillars.slice(1).map((p, i) => (
-              <motion.div
-                key={p.label}
-                {...fadeUp((i + 1) * 0.1)}
-                className="bg-gray-50 rounded-2xl p-8 flex-1 flex flex-col justify-between"
-              >
-                <p className="text-[10px] font-bold tracking-[0.26em] uppercase text-[#f84d07] mb-4">
-                  {p.label}
-                </p>
-                <div>
-                  <h3 className="text-xl font-black text-gray-900 leading-snug mb-3">
-                    {p.heading}
-                  </h3>
-                  <p className="text-sm text-gray-400 leading-relaxed">
-                    {p.body}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+              {/* Heading */}
+              <h3 className="text-2xl font-black text-gray-900 leading-snug">
+                {p.heading}
+              </h3>
 
+              {/* Body */}
+              <p className="text-sm text-gray-400 leading-relaxed">
+                {p.body}
+              </p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
