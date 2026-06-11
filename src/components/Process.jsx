@@ -48,7 +48,14 @@ const steps = [
 
 export default function Process() {
   return (
-    <section className="bg-gray-900 py-20 lg:py-28 overflow-hidden">
+    <section className="relative bg-gray-900 py-20 lg:py-28 overflow-hidden">
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: 'linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px)',
+          backgroundSize: '20vw 20vw',
+        }}
+      />
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
 
         {/* Header */}

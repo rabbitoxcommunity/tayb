@@ -52,7 +52,14 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="bg-gray-50 py-20 lg:py-28">
+    <section id="contact" className="relative bg-gray-50 py-20 lg:py-28">
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: 'linear-gradient(rgba(0,0,0,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.07) 1px, transparent 1px)',
+          backgroundSize: '20vw 20vw',
+        }}
+      />
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-14">
