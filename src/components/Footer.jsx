@@ -80,34 +80,36 @@ export default function Footer() {
                   Arjan, Dubai, UAE
                 </p>
               </div>
-              <div>
-                <p className="text-[10px] font-bold tracking-[0.24em] uppercase text-[#f84d07] mb-3">
-                  Contact
-                </p>
-                <p className="text-sm text-gray-500 leading-relaxed font-mono">
-                  taybcontracting@gmail.com<br />
-                  (04) 575 9029<br />
-                  +971 54 756 6000
-                </p>
-              </div>
-            </div>
+              <div className="flex flex-col gap-6">
+                <div>
+                  <p className="text-[10px] font-bold tracking-[0.24em] uppercase text-[#f84d07] mb-3">
+                    Contact
+                  </p>
+                  <p className="text-sm text-gray-500 leading-relaxed font-mono">
+                    taybcontracting@gmail.com<br />
+                    (04) 575 9029<br />
+                    +971 54 756 6000
+                  </p>
+                </div>
 
-            {/* Social icons */}
-            <div className="flex flex-col gap-2.5 w-full lg:max-w-md">
-              <p className="text-[10px] font-bold tracking-[0.24em] uppercase text-[#f84d07]">
-                Follow Us
-              </p>
-              <div className="flex items-center gap-2">
-                {socials.map((s) => (
-                  <a
-                    key={s.name}
-                    href={s.href}
-                    aria-label={s.name}
-                    className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-50 text-gray-400 hover:text-white hover:bg-[#f84d07] border border-gray-100 transition-all duration-300"
-                  >
-                    {s.icon}
-                  </a>
-                ))}
+                {/* Social icons */}
+                <div className="flex flex-col gap-2.5">
+                  <p className="text-[10px] font-bold tracking-[0.24em] uppercase text-[#f84d07]">
+                    Follow Us
+                  </p>
+                  <div className="flex items-center gap-2">
+                    {socials.map((s) => (
+                      <a
+                        key={s.name}
+                        href={s.href}
+                        aria-label={s.name}
+                        className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-50 text-gray-400 hover:text-white hover:bg-[#f84d07] border border-gray-100 transition-all duration-300"
+                      >
+                        {s.icon}
+                      </a>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>

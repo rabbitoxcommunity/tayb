@@ -3,7 +3,14 @@ import { useState } from 'react'
 const info = [
   {
     label: 'Headquarters',
-    value: 'Office No: 207, 2nd Floor, The Light 1 Commercial Towers, Arjan, Dubai, UAE',
+    value: (
+      <span>
+        Tayb Contracting L.L.C.<br />
+        Office No: 207, 2nd Floor,<br />
+        The Light 1 Commercial Towers,<br />
+        Arjan, Dubai, UAE
+      </span>
+    ),
     icon: (
       <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
