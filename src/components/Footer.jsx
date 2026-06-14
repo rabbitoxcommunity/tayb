@@ -59,10 +59,8 @@ export default function Footer() {
         {/* Row 1 — Brand + contact info */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 py-14 border-b border-gray-100">
           <div>
-            <Link to="/" className="inline-block mb-4">
-              <span className="text-4xl sm:text-5xl font-black tracking-tight leading-none uppercase text-gray-900">
-                Buildline
-              </span>
+            <Link to="/" className="flex items-center gap-2.5 mb-4">
+              <img src="/logo.svg" alt="TAYB Logo" className="w-28 object-contain" />
             </Link>
             <p className="text-sm text-gray-400 leading-relaxed max-w-xs">
               Global construction partner delivering durable, high-quality builds across 12 countries since 2009.
@@ -83,7 +81,7 @@ export default function Footer() {
                 Contact
               </p>
               <p className="text-sm text-gray-500 leading-relaxed">
-                info@buildline.com<br />+971 4 000 0000
+                info@tayb.com<br />+971 4 000 0000
               </p>
             </div>
           </div>
@@ -134,7 +132,7 @@ export default function Footer() {
         {/* Row 3 — Bottom bar */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 py-5">
           <p className="text-xs text-gray-400 uppercase tracking-widest">
-            © {new Date().getFullYear()} Buildline Construction
+            © {new Date().getFullYear()} Tayb Construction
           </p>
 
           <div className="flex items-center gap-1">

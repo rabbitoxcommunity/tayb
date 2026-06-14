@@ -17,15 +17,16 @@ const navLinks = [
 function Logo({ scrolled }) {
   return (
     <Link to="/" className="flex items-center gap-2 shrink-0">
-      <span className={`flex h-7 w-7 items-center justify-center rounded transition-colors duration-300 ${scrolled ? 'bg-[#f84d07]' : 'bg-white'}`}>
-        <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">
-          <polygon points="12,2 22,12 12,22 2,12" fill={scrolled ? 'white' : '#f84d07'} />
-          <polygon points="12,6 18,12 12,18 6,12" fill={scrolled ? '#f84d07' : 'white'} />
-        </svg>
-      </span>
-      <span className={`text-xl font-bold tracking-tight transition-colors duration-300 ${scrolled ? 'text-gray-900' : 'text-white'}`}>
-        BuildLine
-      </span>
+      <img
+        src="/logo.svg"
+        alt="TAYB Logo"
+        className="object-contain transition-all duration-300"
+        style={{
+          width: scrolled ? '70px' : '120px',
+          height: scrolled ? '70px' : '120px',
+          filter: scrolled ? 'none' : 'brightness(0) invert(1)'
+        }}
+      />
     </Link>
   )
 }
@@ -45,15 +46,13 @@ export default function Navbar() {
   })
 
   const activeLinkClass = ({ isActive }) =>
-    `text-sm font-medium transition-colors duration-200 ${
-      isActive
-        ? scrolled ? 'text-[#f84d07]' : 'text-white font-semibold underline underline-offset-4 decoration-white/50'
-        : scrolled ? 'text-gray-700 hover:text-[#f84d07]' : 'text-white/85 hover:text-white'
+    `text-sm font-medium transition-colors duration-200 ${isActive
+      ? scrolled ? 'text-[#f84d07]' : 'text-white font-semibold underline underline-offset-4 decoration-white/50'
+      : scrolled ? 'text-gray-700 hover:text-[#f84d07]' : 'text-white/85 hover:text-white'
     }`
 
   const mobileActiveLinkClass = ({ isActive }) =>
-    `block py-2.5 border-b border-gray-100 text-sm font-medium transition-colors ${
-      isActive ? 'text-[#f84d07] font-semibold' : 'text-gray-800 hover:text-[#f84d07]'
+    `block py-2.5 border-b border-gray-100 text-sm font-medium transition-colors ${isActive ? 'text-[#f84d07] font-semibold' : 'text-gray-800 hover:text-[#f84d07]'
     }`
 
   return (
@@ -88,20 +87,13 @@ export default function Navbar() {
 
         {/* Right */}
         <div className="flex items-center gap-3">
-          <button className={`relative hidden sm:flex transition-colors duration-200 ${scrolled ? 'text-gray-600 hover:text-[#f84d07]' : 'text-white/90 hover:text-white'}`}>
-            <svg className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-            </svg>
-            <span className="absolute -top-1.5 -right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-[#f84d07] text-[10px] font-bold text-white">1</span>
-          </button>
 
           <Link
             to="/contact"
-            className={`hidden sm:flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-300 ${
-              scrolled
-                ? 'bg-[#f84d07] text-white hover:bg-[#d94206] shadow'
-                : 'bg-white text-gray-900 hover:bg-orange-50 shadow'
-            }`}
+            className={`hidden sm:flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-300 ${scrolled
+              ? 'bg-[#f84d07] text-white hover:bg-[#d94206] shadow'
+              : 'bg-white text-gray-900 hover:bg-orange-50 shadow'
+              }`}
           >
             Contact Us
             <span className={`flex h-5 w-5 items-center justify-center rounded-full transition-colors duration-300 ${scrolled ? 'bg-white' : 'bg-gray-900'}`}>
