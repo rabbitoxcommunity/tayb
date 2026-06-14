@@ -9,24 +9,24 @@ import RevealText from '../animations/RevealText'
 
 const values = [
   {
-    label: 'Engineering',
-    heading: 'Precision at Every Joint',
-    desc: 'Every beam, joint, and finish is executed to exacting tolerances by our certified engineering teams.',
+    label: 'Supply Chain',
+    heading: 'Robust Regional Sourcing',
+    desc: 'We partner with leading regional trading companies and specialized vendors, sourcing high-grade materials and the latest construction technologies.',
   },
   {
-    label: 'Sustainability',
-    heading: 'Built for the Future',
-    desc: 'We integrate green building standards into every project — reducing carbon footprint without adding cost.',
+    label: 'Procurement',
+    heading: 'Strict Durability & Aesthetics',
+    desc: 'Through our streamlined procurement process, we ensure every project is built to the highest standards of durability, quality, and aesthetics.',
   },
   {
-    label: 'Partnership',
-    heading: 'Your Success, Our Portfolio',
-    desc: 'We treat every client as a long-term partner, not a single transaction.',
+    label: 'Value Engineering',
+    heading: 'Optimal Value Engineering',
+    desc: 'Our zero tolerance policy and value engineering help us offer optimal value to our clients at unmatched turnaround times.',
   },
   {
-    label: 'Delivery',
-    heading: '96% On-Time, Every Time',
-    desc: 'Deadline discipline is non-negotiable. Our track record speaks for itself across 50+ projects.',
+    label: 'Collaboration',
+    heading: 'Highly Scalable Solutions',
+    desc: 'Our scalable building solutions and openness to collaborations and international alliances help us cater to a diverse clientele across every sector.',
   },
 ]
 
@@ -56,7 +56,7 @@ export default function AboutPage() {
       <PageHero
         label="Who We Are"
         title="About TayB"
-        subtitle="A globally trusted construction partner built on precision, transparency, and 15 years of delivered excellence."
+        subtitle="A Dubai-based Indian construction firm providing comprehensive building contracts and end-to-end solutions since 2024."
         image="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1400&h=700&fit=crop&q=70"
         breadcrumb="About"
       />
@@ -75,13 +75,13 @@ export default function AboutPage() {
 
             <div className="space-y-5 text-sm text-gray-400 leading-relaxed">
               <p>
-                <BlurText text="TayB was founded in 2009 in Dubai by Marcus Reid, a structural engineer who believed the industry deserved better — better communication, better craftsmanship, and better accountability." stagger={0.025} />
+                <BlurText text="Started in the year 2024, we are a Dubai-based Indian construction firm specializing in the execution of comprehensive building contracts. We provide end-to-end construction solutions for developers, institutional builders, and private clients looking to bring sophisticated architectural visions to life within the UAE’s dynamic landscape." stagger={0.025} />
               </p>
               <p>
-                <BlurText text="What started as a 5-person team taking on residential renovations has grown into a 100-strong multidisciplinary firm delivering landmark projects across 12 countries on four continents." stagger={0.025} delay={0.1} />
+                <BlurText text="Our commitment to excellence is best demonstrated through our active project site. We are currently collaborating with Nanma Properties on their flagship development: Nanma Lotus based in Dubai South. This is a residential project comprising 79 units and is designed as B + G + 6 + Roof (Basement, Ground Floor, Six Residential floors, and a Rooftop area)." stagger={0.025} delay={0.1} />
               </p>
               <p>
-                <BlurText text="Today, TayB is synonymous with precision delivery, transparent project management, and sustainable construction practices that meet the highest international standards." stagger={0.025} delay={0.2} />
+                <BlurText text="With a dedicated team of professionals and 200+ labourers based out of India, we have set a projected turnover target of AED 15 Million, reflecting our capacity to handle increasingly complex residential and commercial projects." stagger={0.025} delay={0.2} />
               </p>
             </div>
           </div>

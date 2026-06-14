@@ -10,9 +10,9 @@ const avatars = [
 ]
 
 const stats = [
-  { value: '50+', label: 'Project complete' },
-  { value: '100+', label: 'Expert teams' },
-  { value: '$3.5M', label: 'Project value' },
+  { value: '79', label: 'Lotus units' },
+  { value: '200+', label: 'Labour force' },
+  { value: 'AED 15M', label: 'Turnover target' },
 ]
 
 function StarRating() {

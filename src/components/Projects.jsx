@@ -7,8 +7,8 @@ import RevealText from '../animations/RevealText'
 const categories = ['All', 'Residential', 'Commercial', 'Infrastructure', 'Renovation']
 
 const projects = [
+  { title: 'Nanma Lotus Residential (B+G+6+Roof)', category: 'Residential Construction', location: 'Dubai South, UAE', year: '2024', image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&h=700&fit=crop&q=80' },
   { title: 'Innovative Commercial Building', category: 'Architecture Design', location: 'Dubai, UAE', year: '2024', image: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&h=700&fit=crop&q=80' },
-  { title: 'Eco-Friendly Housing Project', category: 'Residential Construction', location: 'London, UK', year: '2024', image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&h=700&fit=crop&q=80' },
   { title: 'Metro Bridge Expansion', category: 'Infrastructure', location: 'Singapore', year: '2023', image: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&h=700&fit=crop&q=80' },
   { title: 'The Grand Arcade', category: 'Commercial Fit-Out', location: 'New York, USA', year: '2023', image: 'https://images.unsplash.com/photo-1525438160292-a4a860951216?w=800&h=700&fit=crop&q=80' },
   { title: 'Lakefront Villas', category: 'Residential Construction', location: 'Geneva, Switzerland', year: '2022', image: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&h=700&fit=crop&q=80' },

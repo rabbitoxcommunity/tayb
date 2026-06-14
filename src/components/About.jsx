@@ -6,18 +6,18 @@ import RevealText from '../animations/RevealText'
 const pillars = [
   {
     label: 'Our Vision',
-    heading: 'Building a Better World',
-    body: 'To be the world\'s most trusted construction partner — delivering landmarks that stand for generations and communities that thrive for centuries.',
+    heading: 'Quality Beyond Profit',
+    body: 'At TayB, we have strived towards living up to our name by providing superior quality building construction at highly competitive prices. Construction for us is beyond mere profit; it is our social responsibility.',
   },
   {
     label: 'Our Mission',
-    heading: 'Precision at Every Stage',
-    body: 'To deliver innovative, sustainable construction through expert craftsmanship, rigorous safety standards, and technology-driven processes — on time and within budget.',
+    heading: 'Zero Tolerance Policy',
+    body: 'Our zero tolerance policy and value engineering help us offer optimal value to our clients at unmatched turnaround times. Through our highly scalable building solutions, we cater to a diverse clientele across every sector.',
   },
   {
-    label: 'Our Values',
-    heading: 'Integrity Above All',
-    body: 'Integrity, excellence, and collaboration form the foundation of everything we do. We build trust with clients, partners, and communities through transparent action and consistent results.',
+    label: 'Why Choose Us',
+    heading: 'Collaborative Excellence',
+    body: 'Our openness to collaborations, international alliances for superior technology transfer, and vast experience help us truly bring goodness to our clients.',
   },
 ]
 
@@ -55,14 +55,14 @@ export default function About() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
               <p className="text-sm text-gray-400 leading-relaxed">
                 <BlurText
-                  text="Founded in 2009, TayB has grown from a regional contractor into a globally recognized construction partner across 12 countries."
+                  text="Started in the year 2024, we are a Dubai-based Indian construction firm specializing in the execution of comprehensive building contracts. We provide end-to-end construction solutions for developers, institutional builders, and private clients looking to bring sophisticated architectural visions to life."
                   stagger={0.035}
                   duration={0.5}
                 />
               </p>
               <p className="text-sm text-gray-400 leading-relaxed">
                 <BlurText
-                  text="We combine local regulatory knowledge with internationally certified processes to deliver every project on time and within budget."
+                  text="We maintain a robust supply chain by partnering with leading trading companies and specialized vendors. Sourcing high-grade materials and latest construction technologies ensures every project is built to the highest standards of durability."
                   stagger={0.035}
                   duration={0.5}
                   delay={0.15}

@@ -63,7 +63,7 @@ export default function Footer() {
               <img src="/logo.svg" alt="TayB Logo" className="w-28 object-contain" />
             </Link>
             <p className="text-sm text-gray-400 leading-relaxed max-w-xs">
-              Global construction partner delivering durable, high-quality builds across 12 countries since 2009.
+              Dubai-based Indian construction firm delivering comprehensive building contracts and high-quality construction solutions since 2024.
             </p>
           </div>
 

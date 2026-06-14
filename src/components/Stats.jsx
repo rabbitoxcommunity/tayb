@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 
 const stats = [
-  { value: 50, suffix: '+', label: 'Projects Completed', desc: 'Delivered on time and within budget' },
-  { value: 100, suffix: '+', label: 'Expert Team Members', desc: 'Certified engineers, architects & managers' },
-  { value: 3.5, suffix: 'M', prefix: '$', label: 'Project Value Managed', desc: 'Across residential & commercial sectors' },
-  { value: 15, suffix: '+', label: 'Years of Experience', desc: 'Building trust one project at a time' },
+  { value: 79, label: 'Nanma Lotus Units', desc: 'Flagship residential project under execution in Dubai South' },
+  { value: 200, suffix: '+', label: 'Dedicated Labourers', desc: 'Skilled workforce based out of India' },
+  { value: 15, suffix: 'M', prefix: 'AED ', label: 'Projected Turnover', desc: 'Reflecting our capacity for complex projects' },
+  { value: 2024, label: 'Year Founded', desc: 'Dubai-based Indian building construction contractor' },
 ]
 
 function Counter({ target, suffix, prefix }) {
