@@ -19,7 +19,7 @@ function Logo({ scrolled }) {
     <Link to="/" className="flex items-center gap-2 shrink-0">
       <img
         src="/logo.svg"
-        alt="TAYB Logo"
+        alt="TayB Logo"
         className="object-contain transition-all duration-300"
         style={{
           width: scrolled ? '70px' : '120px',

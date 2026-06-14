@@ -55,7 +55,7 @@ export default function About() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
               <p className="text-sm text-gray-400 leading-relaxed">
                 <BlurText
-                  text="Founded in 2009, Tayb has grown from a regional contractor into a globally recognized construction partner across 12 countries."
+                  text="Founded in 2009, TayB has grown from a regional contractor into a globally recognized construction partner across 12 countries."
                   stagger={0.035}
                   duration={0.5}
                 />

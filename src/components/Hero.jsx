@@ -68,7 +68,7 @@ export default function Hero() {
         className="absolute inset-x-0 top-0 flex justify-center pointer-events-none select-none overflow-hidden"
       >
         <span className="text-[22vw] font-black text-white/[0.06] leading-none tracking-tighter whitespace-nowrap">
-          TAYB
+          TayB
         </span>
       </motion.div>
 

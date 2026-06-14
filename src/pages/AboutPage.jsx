@@ -55,7 +55,7 @@ export default function AboutPage() {
     <>
       <PageHero
         label="Who We Are"
-        title="About Tayb"
+        title="About TayB"
         subtitle="A globally trusted construction partner built on precision, transparency, and 15 years of delivered excellence."
         image="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1400&h=700&fit=crop&q=70"
         breadcrumb="About"
@@ -75,13 +75,13 @@ export default function AboutPage() {
 
             <div className="space-y-5 text-sm text-gray-400 leading-relaxed">
               <p>
-                <BlurText text="Tayb was founded in 2009 in Dubai by Marcus Reid, a structural engineer who believed the industry deserved better — better communication, better craftsmanship, and better accountability." stagger={0.025} />
+                <BlurText text="TayB was founded in 2009 in Dubai by Marcus Reid, a structural engineer who believed the industry deserved better — better communication, better craftsmanship, and better accountability." stagger={0.025} />
               </p>
               <p>
                 <BlurText text="What started as a 5-person team taking on residential renovations has grown into a 100-strong multidisciplinary firm delivering landmark projects across 12 countries on four continents." stagger={0.025} delay={0.1} />
               </p>
               <p>
-                <BlurText text="Today, Tayb is synonymous with precision delivery, transparent project management, and sustainable construction practices that meet the highest international standards." stagger={0.025} delay={0.2} />
+                <BlurText text="Today, TayB is synonymous with precision delivery, transparent project management, and sustainable construction practices that meet the highest international standards." stagger={0.025} delay={0.2} />
               </p>
             </div>
           </div>
@@ -94,7 +94,7 @@ export default function AboutPage() {
           >
             <img
               src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1400&h=700&fit=crop&q=80"
-              alt="Tayb construction site"
+              alt="TayB construction site"
               className="h-full w-full object-cover"
             />
           </motion.div>

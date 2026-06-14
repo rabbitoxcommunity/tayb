@@ -60,29 +60,55 @@ export default function Footer() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 py-14 border-b border-gray-100">
           <div>
             <Link to="/" className="flex items-center gap-2.5 mb-4">
-              <img src="/logo.svg" alt="TAYB Logo" className="w-28 object-contain" />
+              <img src="/logo.svg" alt="TayB Logo" className="w-28 object-contain" />
             </Link>
             <p className="text-sm text-gray-400 leading-relaxed max-w-xs">
               Global construction partner delivering durable, high-quality builds across 12 countries since 2009.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-6 lg:justify-items-end">
-            <div>
-              <p className="text-[10px] font-bold tracking-[0.24em] uppercase text-[#f84d07] mb-3">
-                Location
-              </p>
-              <p className="text-sm text-gray-500 leading-relaxed">
-                14 Builder Street<br />Dubai, UAE
-              </p>
+          <div className="flex flex-col gap-6 lg:items-end">
+            <div className="grid grid-cols-2 gap-6 lg:gap-16 w-full lg:max-w-md">
+              <div>
+                <p className="text-[10px] font-bold tracking-[0.24em] uppercase text-[#f84d07] mb-3">
+                  Location
+                </p>
+                <p className="text-sm text-gray-500 leading-relaxed">
+                  Tayb Contracting L.L.C. <br />
+                  Office No: 207, 2nd Floor,<br />
+                  The Light 1 Commercial Towers,<br />
+                  Arjan, Dubai, UAE
+                </p>
+              </div>
+              <div>
+                <p className="text-[10px] font-bold tracking-[0.24em] uppercase text-[#f84d07] mb-3">
+                  Contact
+                </p>
+                <p className="text-sm text-gray-500 leading-relaxed font-mono">
+                  taybcontracting@gmail.com<br />
+                  (04) 575 9029<br />
+                  +971 54 756 6000
+                </p>
+              </div>
             </div>
-            <div>
-              <p className="text-[10px] font-bold tracking-[0.24em] uppercase text-[#f84d07] mb-3">
-                Contact
+
+            {/* Social icons */}
+            <div className="flex flex-col gap-2.5 w-full lg:max-w-md">
+              <p className="text-[10px] font-bold tracking-[0.24em] uppercase text-[#f84d07]">
+                Follow Us
               </p>
-              <p className="text-sm text-gray-500 leading-relaxed">
-                info@tayb.com<br />+971 4 000 0000
-              </p>
+              <div className="flex items-center gap-2">
+                {socials.map((s) => (
+                  <a
+                    key={s.name}
+                    href={s.href}
+                    aria-label={s.name}
+                    className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-50 text-gray-400 hover:text-white hover:bg-[#f84d07] border border-gray-100 transition-all duration-300"
+                  >
+                    {s.icon}
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -132,25 +158,19 @@ export default function Footer() {
         {/* Row 3 — Bottom bar */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 py-5">
           <p className="text-xs text-gray-400 uppercase tracking-widest">
-            © {new Date().getFullYear()} Tayb Construction
+            © {new Date().getFullYear()} Tayb Contracting L.L.C.
           </p>
 
-          <div className="flex items-center gap-1">
-            {socials.map((s) => (
-              <a
-                key={s.name}
-                href={s.href}
-                aria-label={s.name}
-                className="flex h-8 w-8 items-center justify-center text-gray-400 hover:text-[#f84d07] transition-colors"
-              >
-                {s.icon}
-              </a>
-            ))}
-          </div>
-
-          <div className="flex gap-6 text-xs text-gray-400 uppercase tracking-widest">
-            <a href="#" className="hover:text-gray-900 transition-colors">Privacy</a>
-            <a href="#" className="hover:text-gray-900 transition-colors">Terms</a>
+          <div className="text-xs text-gray-400 uppercase tracking-widest">
+            Designed by{' '}
+            <a
+              href="https://www.instagram.com/rabbitoxcommunity/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-gray-900 transition-colors font-semibold"
+            >
+              Rabbitox Community
+            </a>
           </div>
         </div>
 
