@@ -3,11 +3,18 @@ import { Link } from 'react-router-dom'
 import SplitText from '../animations/SplitText'
 import BlurText from '../animations/BlurText'
 
-export default function PageHero({ label, title, subtitle, breadcrumb }) {
+export default function PageHero({ label, title, subtitle, image, breadcrumb }) {
   return (
-    <section className="relative pt-36 pb-16 lg:pt-44 lg:pb-20 overflow-hidden" style={{ background: 'linear-gradient(to right, #f84d07, #ffa881)' }}>
-      {/* Texture overlay */}
-      <div className="relative mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+    <section className="relative pt-36 pb-16 lg:pt-44 lg:pb-20 overflow-hidden bg-[#f84d07]">
+      {/* Texture overlay — right side only */}
+      <img
+        src="/overlay.webp"
+        alt=""
+        className="absolute bottom-0 right-0 h-full w-[60%] object-contain object-right-bottom pointer-events-none"
+        style={{ mixBlendMode: 'overlay' }}
+      />
+
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 z-10">
 
         {/* Top row — breadcrumb + label */}
         <div className="flex items-center justify-between mb-12">
@@ -55,13 +62,6 @@ export default function PageHero({ label, title, subtitle, breadcrumb }) {
         </div>
 
       </div>
-      {/* Texture overlay — right side only */}
-      <img
-        src="/overlay.webp"
-        alt=""
-        className="absolute bottom-0 right-0 h-full w-[60%] object-contain object-right object-bottom pointer-events-none"
-        style={{ mixBlendMode: 'overlay' }}
-      />
     </section>
   )
 }

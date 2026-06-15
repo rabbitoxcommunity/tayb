@@ -3,21 +3,14 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import SplitText from '../animations/SplitText'
 import RevealText from '../animations/RevealText'
+import { projects } from '../data/projects'
 
 const categories = ['All', 'Residential', 'Commercial', 'Infrastructure', 'Renovation']
-
-const projects = [
-  { title: 'Nanma Lotus Residential (B+G+6+Roof)', category: 'Residential Construction', location: 'Dubai South, UAE', year: '2024', image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&h=700&fit=crop&q=80' },
-  { title: 'Innovative Commercial Building', category: 'Architecture Design', location: 'Dubai, UAE', year: '2024', image: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&h=700&fit=crop&q=80' },
-  { title: 'Metro Bridge Expansion', category: 'Infrastructure', location: 'Singapore', year: '2023', image: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&h=700&fit=crop&q=80' },
-  { title: 'The Grand Arcade', category: 'Commercial Fit-Out', location: 'New York, USA', year: '2023', image: 'https://images.unsplash.com/photo-1525438160292-a4a860951216?w=800&h=700&fit=crop&q=80' },
-  { title: 'Lakefront Villas', category: 'Residential Construction', location: 'Geneva, Switzerland', year: '2022', image: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&h=700&fit=crop&q=80' },
-  { title: 'Central Park Pavilion', category: 'Renovation', location: 'Paris, France', year: '2022', image: 'https://images.unsplash.com/photo-1467533003447-e295ff1b0435?w=800&h=700&fit=crop&q=80' },
-]
 
 export default function Projects({ preview = false }) {
   const [active, setActive] = useState('All')
 
+  // Filter projects by category, matching base categories
   const filtered = active === 'All' ? projects : projects.filter((p) => p.category === active)
   const displayed = preview ? projects.slice(0, 4) : filtered
 
@@ -87,27 +80,29 @@ export default function Projects({ preview = false }) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 12 }}
                 transition={{ duration: 0.38, delay: i * 0.05 }}
-                className="group cursor-pointer"
+                className="group"
               >
-                {/* Image */}
-                <div className="overflow-hidden mb-5 aspect-[4/3] bg-gray-100">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
+                <Link to={`/projects/${project.slug}`} className="block">
+                  {/* Image */}
+                  <div className="overflow-hidden mb-5 aspect-[4/3] bg-gray-100 rounded-2xl border border-gray-100 shadow-sm">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-103"
+                    />
+                  </div>
 
-                {/* Title */}
-                <h3 className="text-xl sm:text-2xl font-black text-gray-900 leading-tight mb-3 group-hover:text-[#f84d07] transition-colors">
-                  {project.title}
-                </h3>
+                  {/* Title */}
+                  <h3 className="text-xl sm:text-2xl font-black text-gray-900 leading-tight mb-3 group-hover:text-[#f84d07] transition-colors uppercase">
+                    {project.title}
+                  </h3>
 
-                {/* Orange dash + category */}
-                <div className="flex items-center gap-3">
-                  <div className="h-px w-6 bg-[#f84d07] shrink-0" />
-                  <p className="text-sm text-[#f84d07] font-medium">{project.category}</p>
-                </div>
+                  {/* Orange dash + category */}
+                  <div className="flex items-center gap-3">
+                    <div className="h-px w-6 bg-[#f84d07] shrink-0" />
+                    <p className="text-sm text-[#f84d07] font-semibold uppercase tracking-wider">{project.category}</p>
+                  </div>
+                </Link>
               </motion.div>
             ))}
           </AnimatePresence>
