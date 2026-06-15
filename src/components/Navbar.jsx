@@ -12,6 +12,7 @@ const navLinks = [
   { label: 'About', to: '/about' },
   { label: 'Projects', to: '/projects' },
   { label: 'Gallery', to: '/gallery' },
+  { label: 'Contact', to: '/contact' },
 ]
 
 function Logo({ scrolled }) {
@@ -89,13 +90,13 @@ export default function Navbar() {
         <div className="flex items-center gap-3">
 
           <Link
-            to="/contact"
+            to="/contact#enquiry-form"
             className={`hidden sm:flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-300 ${scrolled
               ? 'bg-[#f84d07] text-white hover:bg-[#d94206] shadow'
               : 'bg-white text-gray-900 hover:bg-orange-50 shadow'
               }`}
           >
-            Contact Us
+            Enquire Now
             <span className={`flex h-5 w-5 items-center justify-center rounded-full transition-colors duration-300 ${scrolled ? 'bg-white' : 'bg-gray-900'}`}>
               <svg className={`h-3 w-3 transition-colors duration-300 ${scrolled ? 'text-[#f84d07]' : 'text-white'}`} fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
@@ -151,11 +152,11 @@ export default function Navbar() {
               ))}
               <div className="pt-3">
                 <Link
-                  to="/contact"
+                  to="/contact#enquiry-form"
                   onClick={() => setMobileOpen(false)}
                   className="inline-flex items-center gap-2 rounded-full bg-[#f84d07] px-5 py-2.5 text-sm font-semibold text-white"
                 >
-                  Contact Us
+                  Enquire Now
                 </Link>
               </div>
             </div>

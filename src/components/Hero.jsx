@@ -3,55 +3,12 @@ import SplitText from '../animations/SplitText'
 import BlurText from '../animations/BlurText'
 import RevealText from '../animations/RevealText'
 
-const avatars = [
-  'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face',
-  'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=40&h=40&fit=crop&crop=face',
-  'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face',
-]
-
 const stats = [
   { value: '79', label: 'Lotus units' },
   { value: '200+', label: 'Labour force' },
   { value: 'AED 15M', label: 'Turnover target' },
 ]
 
-function StarRating() {
-  return (
-    <div className="flex gap-0.5">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <motion.svg
-          key={i}
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.6 + i * 0.08, duration: 0.3, type: 'spring', stiffness: 300 }}
-          className="h-4 w-4 text-yellow-400"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-        >
-          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-        </motion.svg>
-      ))}
-    </div>
-  )
-}
-
-function AvatarStack() {
-  return (
-    <div className="flex -space-x-3">
-      {avatars.map((src, i) => (
-        <motion.img
-          key={i}
-          src={src}
-          alt={`User ${i + 1}`}
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.3 + i * 0.1, duration: 0.4 }}
-          className="h-9 w-9 rounded-full ring-2 ring-white object-cover"
-        />
-      ))}
-    </div>
-  )
-}
 
 export default function Hero() {
   return (
@@ -60,7 +17,7 @@ export default function Hero() {
       <div className="absolute inset-0 grid-overlay pointer-events-none" />
 
       {/* Decorative large faded text */}
-      <motion.div
+      {/* <motion.div
         aria-hidden="true"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -68,9 +25,9 @@ export default function Hero() {
         className="absolute inset-x-0 top-0 flex justify-center pointer-events-none select-none overflow-hidden"
       >
         <span className="text-[22vw] font-black text-white/[0.06] leading-none tracking-tighter whitespace-nowrap">
-          TayB
+          TAYB
         </span>
-      </motion.div>
+      </motion.div> */}
 
       {/* ── Right-aligned building image (absolute) ── */}
       <motion.img
@@ -98,23 +55,8 @@ export default function Hero() {
           {/* Left content */}
           <div className="max-w-xl lg:pb-20 xl:pb-28">
 
-            {/* Social proof */}
-            <div className="mb-6 flex items-center gap-3">
-              <AvatarStack />
-              <div>
-                <StarRating />
-                <motion.p
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.1, duration: 0.4 }}
-                  className="text-xs text-white/80 mt-0.5 font-medium"
-                >
-                  Over 1k+ happy users
-                </motion.p>
-              </div>
-            </div>
 
-            {/* Headline — SplitText (char by char) */}
+{/* Headline — SplitText (char by char) */}
             <h1 className="text-[clamp(2.6rem,6.5vw,4.75rem)] font-black text-white leading-[1.0] tracking-tight mb-6 uppercase">
               <SplitText text="Building Strong" delay={0.15} stagger={0.032} once={false} />
               <br />
