@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import PageHero from '../components/PageHero'
 import RevealText from '../animations/RevealText'
+import api from '../lib/api'
 
 const info = [
   { label: 'Headquarters', value: <span>Tayb Contracting L.L.C.<br />Office No: 207, 2nd Floor,<br />The Light 1 Commercial Towers,<br />Arjan, Dubai, UAE</span>, icon: <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg> },
@@ -61,6 +62,8 @@ function fadeUp(delay = 0) {
 export default function ContactPage() {
   const [form, setForm] = useState({ name: '', email: '', phone: '', company: '', service: '', budget: '', message: '' })
   const [sent, setSent] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState('')
   const { hash } = useLocation()
 
   useEffect(() => {
@@ -71,7 +74,21 @@ export default function ContactPage() {
   }, [hash])
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
-  const handleSubmit = (e) => { e.preventDefault(); setSent(true) }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setError('')
+    setSubmitting(true)
+    try {
+      await api.post('/enquiries', form)
+      setSent(true)
+      setForm({ name: '', email: '', phone: '', company: '', service: '', budget: '', message: '' })
+    } catch {
+      setError('Something went wrong. Please try again or email us directly.')
+    } finally {
+      setSubmitting(false)
+    }
+  }
 
   return (
     <>
@@ -190,9 +207,12 @@ export default function ContactPage() {
                     <textarea name="message" required rows={5} value={form.message} onChange={handleChange} placeholder="Tell us about your project — location, size, timeline, and any specific requirements..." className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:border-[#f84d07] focus:outline-none focus:ring-2 focus:ring-[#f84d07]/20 resize-none" />
                   </div>
 
-                  <button type="submit" className="w-full rounded-full bg-[#f84d07] py-3.5 text-sm font-semibold text-white hover:bg-[#d94206] transition-colors shadow flex items-center justify-center gap-2">
-                    Send Message
-                    <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" /></svg>
+                  {error && (
+                    <p className="text-sm text-red-500 bg-red-50 border border-red-100 rounded-xl px-4 py-2.5">{error}</p>
+                  )}
+                  <button type="submit" disabled={submitting} className="w-full rounded-full bg-[#f84d07] py-3.5 text-sm font-semibold text-white hover:bg-[#d94206] disabled:opacity-60 transition-colors shadow flex items-center justify-center gap-2">
+                    {submitting ? 'Sending…' : 'Send Message'}
+                    {!submitting && <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" /></svg>}
                   </button>
                 </form>
               )}
