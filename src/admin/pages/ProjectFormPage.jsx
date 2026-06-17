@@ -28,6 +28,12 @@ function RichEditor({ value, onChange }) {
     editorProps: { attributes: { class: 'tiptap-content px-4 py-3 min-h-[180px] text-sm text-[#111] outline-none' } },
   })
 
+  useEffect(() => {
+    if (editor && value && editor.getHTML() !== value) {
+      editor.commands.setContent(value)
+    }
+  }, [editor, value])
+
   const Btn = ({ onClick, active, title, children }) => (
     <button
       type="button"
@@ -259,11 +265,13 @@ export default function ProjectFormPage() {
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
 
-        {/* Row 1 — Basic Info full width */}
+        {/* Basic Info — full width */}
         <Card title="Basic Info">
-            <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-4">
 
-              <div className="col-span-2">
+            {/* Row 1: Title + Year */}
+            <div className="grid grid-cols-[1fr_120px] gap-4 items-start">
+              <div>
                 <label className={lbl}>Title *</label>
                 <input
                   placeholder="Project name"
@@ -272,23 +280,23 @@ export default function ProjectFormPage() {
                 />
                 {fieldErr(errors.title?.message)}
               </div>
-
-              <div className="col-span-2">
-                <label className={lbl}>Slug *</label>
+              <div>
+                <label className={lbl}>Year</label>
                 <input
-                  placeholder="project-slug"
-                  className={`${inp('slug')} font-mono text-xs`}
-                  {...register('slug', {
-                    required: 'Slug is required',
-                    pattern: {
-                      value: /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
-                      message: 'Only lowercase letters, numbers and hyphens allowed',
-                    },
+                  placeholder="2024"
+                  className={inp('year')}
+                  {...register('year', {
+                    pattern: { value: /^\d{4}$/, message: 'Enter a valid 4-digit year' },
                   })}
                 />
-                {fieldErr(errors.slug?.message)}
+                {fieldErr(errors.year?.message)}
               </div>
+            </div>
 
+            <input type="hidden" {...register('slug', { required: true })} />
+
+            {/* Row 2: Project Type, Property Type, Location */}
+            <div className="grid grid-cols-3 gap-4 items-start">
               <div>
                 <label className={lbl}>Project Type *</label>
                 <select
@@ -339,47 +347,47 @@ export default function ProjectFormPage() {
                   {...register('location')}
                 />
               </div>
-
-              <div>
-                <label className={lbl}>Year</label>
-                <input
-                  placeholder="2024"
-                  className={inp('year')}
-                  {...register('year', {
-                    pattern: {
-                      value: /^\d{4}$/,
-                      message: 'Enter a valid 4-digit year',
-                    },
-                  })}
-                />
-                {fieldErr(errors.year?.message)}
-              </div>
-
-              <div className="col-span-2">
-                <label className={lbl}>Sub Description</label>
-                <textarea
-                  rows={3}
-                  placeholder="Short project summary…"
-                  className={`${inp('subDescription')} resize-none`}
-                  {...register('subDescription')}
-                />
-              </div>
-
-              <div className="col-span-2">
-                <label className="flex items-center gap-2.5 cursor-pointer w-fit group">
-                  <div className={`h-5 w-5 rounded-md flex items-center justify-center border transition-colors ${featuredValue ? 'bg-[#f84d07] border-[#f84d07]' : 'border-[#E0E0E0] group-hover:border-[#f84d07]/40'}`}>
-                    {featuredValue && (
-                      <svg className="h-3 w-3 text-white" fill="none" stroke="currentColor" strokeWidth={3} viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                      </svg>
-                    )}
-                  </div>
-                  <input type="checkbox" {...register('featured')} className="hidden" />
-                  <span className="text-[13px] text-[#6B7280]">Mark as featured</span>
-                </label>
-              </div>
-
             </div>
+
+            {/* Row 3: Sub Description */}
+            <div>
+              <label className={lbl}>Sub Description</label>
+              <textarea
+                rows={3}
+                placeholder="Short project summary shown in the banner…"
+                className={`${inp('subDescription')} resize-none`}
+                {...register('subDescription')}
+              />
+            </div>
+
+            {/* Featured toggle */}
+            <div
+              onClick={() => setValue('featured', !featuredValue)}
+              className={`flex items-center justify-between gap-4 px-4 py-3.5 rounded-xl border cursor-pointer transition-all select-none ${
+                featuredValue
+                  ? 'bg-[#fff5f2] border-[#f84d07]/30'
+                  : 'bg-[#F5F5F5] border-transparent hover:border-[#f84d07]/20'
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <div className={`h-9 w-9 rounded-lg flex items-center justify-center shrink-0 transition-colors ${featuredValue ? 'bg-[#f84d07]' : 'bg-white border border-[#E0E0E0]'}`}>
+                  <svg className={`h-4 w-4 transition-colors ${featuredValue ? 'text-white' : 'text-[#C4C4C4]'}`} fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+                  </svg>
+                </div>
+                <div>
+                  <p className={`text-[13px] font-semibold transition-colors ${featuredValue ? 'text-[#f84d07]' : 'text-[#111]'}`}>Featured Project</p>
+                  <p className="text-[11px] text-[#9CA3AF] mt-0.5">Highlighted on homepage and listings</p>
+                </div>
+              </div>
+              {/* Toggle switch */}
+              <div className={`relative h-6 w-11 rounded-full transition-colors shrink-0 ${featuredValue ? 'bg-[#f84d07]' : 'bg-[#D1D5DB]'}`}>
+                <div className={`absolute top-1 h-4 w-4 rounded-full bg-white shadow-sm transition-all ${featuredValue ? 'left-6' : 'left-1'}`} />
+              </div>
+              <input type="checkbox" {...register('featured')} className="hidden" />
+            </div>
+
+          </div>
         </Card>
 
         {/* Main Description — full width */}

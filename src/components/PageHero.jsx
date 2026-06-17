@@ -6,6 +6,17 @@ import BlurText from '../animations/BlurText'
 export default function PageHero({ label, title, subtitle, image, breadcrumb }) {
   return (
     <section className="relative pt-36 pb-16 lg:pt-44 lg:pb-20 overflow-hidden bg-[#f84d07]">
+      {/* Cover image background */}
+      {image && (
+        <img
+          src={image}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      )}
+      {/* Overlay — black gradient (bottom→top) over image, solid orange without */}
+      <div className={`absolute inset-0 ${image ? 'bg-gradient-to-t from-black/90 via-black/50 to-black/20' : 'bg-[#f84d07]'}`} />
+
       {/* Texture overlay — right side only */}
       <img
         src="/overlay.webp"

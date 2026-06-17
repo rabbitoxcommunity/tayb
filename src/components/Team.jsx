@@ -98,22 +98,6 @@ export default function Team() {
           ))}
         </div>
 
-        {/* Join CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-12 text-center"
-        >
-          <p className="text-gray-500 mb-4">Interested in joining our team?</p>
-          <a href="#" className="inline-flex items-center gap-2 rounded-full border-2 border-gray-900 px-6 py-2.5 text-sm font-semibold text-gray-900 hover:bg-gray-900 hover:text-white transition-colors">
-            View Open Positions
-            <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
-            </svg>
-          </a>
-        </motion.div>
       </div>
     </section>
   )

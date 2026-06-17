@@ -47,8 +47,8 @@ function AdminLayoutInner() {
   }
 
   return (
-    <div className="min-h-screen bg-[#E8E6E3] p-3">
-      <div className="flex rounded-2xl overflow-hidden min-h-[calc(100vh-24px)] shadow-[0_8px_32px_rgba(0,0,0,0.10)] border border-white/60">
+    <div className="h-screen overflow-hidden bg-[#E8E6E3] p-3">
+      <div className="flex rounded-2xl overflow-hidden h-[calc(100vh-24px)] shadow-[0_8px_32px_rgba(0,0,0,0.10)] border border-white/60">
 
         {/* Sidebar */}
         <aside className="w-56 bg-white flex flex-col shrink-0">
