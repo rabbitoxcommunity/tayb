@@ -9,11 +9,18 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tiptap/extension-text-align": "^3.26.1",
+    "@tiptap/extension-underline": "^3.26.1",
+    "@tiptap/pm": "^3.26.1",
+    "@tiptap/react": "^3.26.1",
+    "@tiptap/starter-kit": "^3.26.1",
     "axios": "^1.18.0",
     "framer-motion": "^12.40.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^7.17.0"
+    "react-hook-form": "^7.79.0",
+    "react-router-dom": "^7.17.0",
+    "react-toastify": "^11.1.0"
   },
   "devDependencies": {
     "@types/react": "^18.3.1",

@@ -16,8 +16,8 @@ export default function ProjectsPage() {
       .finally(() => setLoading(false))
   }, [])
 
-  const categories = ['All', ...new Set(projects.map((p) => p.category))]
-  const filtered = active === 'All' ? projects : projects.filter((p) => p.category === active)
+  const categories = ['All', ...new Set(projects.map((p) => p.projectType).filter(Boolean))]
+  const filtered = active === 'All' ? projects : projects.filter((p) => p.projectType === active)
 
   return (
     <>
@@ -106,7 +106,7 @@ export default function ProjectsPage() {
                       </h3>
                       <div className="flex items-center gap-3">
                         <div className="h-px w-6 bg-[#f84d07] shrink-0" />
-                        <p className="text-sm text-[#f84d07] font-semibold uppercase tracking-wider">{project.category}</p>
+                        <p className="text-sm text-[#f84d07] font-semibold uppercase tracking-wider">{project.projectType}</p>
                       </div>
                     </Link>
                   </motion.div>

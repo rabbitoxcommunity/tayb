@@ -1,8 +1,15 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+import { useEditor, EditorContent } from '@tiptap/react'
+import StarterKit from '@tiptap/starter-kit'
+import Underline from '@tiptap/extension-underline'
+import { toast } from 'react-toastify'
 import api from '../api/axios'
+import { useConfirm } from '../contexts/ConfirmContext'
 
-const CATEGORIES = ['Residential', 'Commercial', 'Infrastructure', 'Renovation', 'Interior']
+const PROJECT_TYPES = ['Ongoing', 'Ready to Move In', 'Completed', 'New Launch']
+const PROPERTY_TYPES = ['Apartment', 'Villa', 'Studio', 'Penthouse', 'Townhouse', 'Other']
 
 const AMENITY_SUGGESTIONS = [
   'Swimming Pool', 'Gymnasium', 'Parking', 'Security', 'Power Backup',
@@ -11,80 +18,154 @@ const AMENITY_SUGGESTIONS = [
   'Solar Panels', 'EV Charging', 'Rainwater Harvesting', 'Waste Management',
 ]
 
-const NEARBY_TYPES = [
-  { value: 'education', label: 'Education' },
-  { value: 'healthcare', label: 'Healthcare' },
-  { value: 'shopping', label: 'Shopping' },
-  { value: 'transport', label: 'Transport' },
-  { value: 'dining', label: 'Dining' },
-  { value: 'recreation', label: 'Recreation' },
-  { value: 'other', label: 'Other' },
-]
+const slugify = (str) => str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+
+function RichEditor({ value, onChange }) {
+  const editor = useEditor({
+    extensions: [StarterKit, Underline],
+    content: value || '',
+    onUpdate: ({ editor }) => onChange(editor.getHTML()),
+    editorProps: { attributes: { class: 'tiptap-content px-4 py-3 min-h-[180px] text-sm text-[#111] outline-none' } },
+  })
+
+  const Btn = ({ onClick, active, title, children }) => (
+    <button
+      type="button"
+      title={title}
+      onClick={onClick}
+      className={`h-7 min-w-[28px] px-1.5 flex items-center justify-center rounded-lg text-xs font-semibold transition-colors ${
+        active ? 'bg-[#f84d07] text-white' : 'text-[#6B7280] hover:bg-[#F0F0F0] hover:text-[#111]'
+      }`}
+    >
+      {children}
+    </button>
+  )
+
+  if (!editor) return null
+
+  return (
+    <div className="border border-[#EBEBEB] rounded-xl overflow-hidden transition-all focus-within:ring-2 focus-within:ring-[#f84d07]/20 focus-within:border-[#f84d07]/30">
+      {/* Toolbar */}
+      <div className="flex items-center gap-0.5 px-2 py-1.5 bg-[#FAFAFA] border-b border-[#F0F0F0] flex-wrap">
+        <Btn onClick={() => editor.chain().focus().toggleBold().run()} active={editor.isActive('bold')} title="Bold">
+          <strong>B</strong>
+        </Btn>
+        <Btn onClick={() => editor.chain().focus().toggleItalic().run()} active={editor.isActive('italic')} title="Italic">
+          <em>I</em>
+        </Btn>
+        <Btn onClick={() => editor.chain().focus().toggleUnderline().run()} active={editor.isActive('underline')} title="Underline">
+          <span className="underline">U</span>
+        </Btn>
+        <div className="w-px h-4 bg-[#E8E8E8] mx-1" />
+        <Btn onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()} active={editor.isActive('heading', { level: 1 })} title="Heading 1">H1</Btn>
+        <Btn onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()} active={editor.isActive('heading', { level: 2 })} title="Heading 2">H2</Btn>
+        <Btn onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()} active={editor.isActive('heading', { level: 3 })} title="Heading 3">H3</Btn>
+        <div className="w-px h-4 bg-[#E8E8E8] mx-1" />
+        <Btn onClick={() => editor.chain().focus().toggleBulletList().run()} active={editor.isActive('bulletList')} title="Bullet List">
+          <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.008v.008H3.75V6.75zm0 5.25h.008v.008H3.75V12zm0 5.25h.008v.008H3.75v-.008z" />
+          </svg>
+        </Btn>
+        <Btn onClick={() => editor.chain().focus().toggleOrderedList().run()} active={editor.isActive('orderedList')} title="Ordered List">
+          <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M8.242 5.992h12m-12 6.003H20.24m-12 5.999h12M4.117 7.495v-3.75H2.99m1.125 3.75H2.99m1.125 0H5.24m-1.92 2.577a1.125 1.125 0 113.356 1.548l-2.305 2.426H5.24m-1.92 2.577a1.125 1.125 0 113.356 1.548l-2.305 2.426H5.24" />
+          </svg>
+        </Btn>
+        <div className="w-px h-4 bg-[#E8E8E8] mx-1" />
+        <Btn onClick={() => editor.chain().focus().clearNodes().unsetAllMarks().run()} title="Clear formatting">
+          <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </Btn>
+      </div>
+      <EditorContent editor={editor} />
+    </div>
+  )
+}
 
 export default function ProjectFormPage() {
   const { id } = useParams()
   const isEdit = Boolean(id)
   const navigate = useNavigate()
+  const confirm = useConfirm()
 
-  const [form, setForm] = useState({
-    title: '', slug: '', category: '', description: '',
-    location: '', year: '', status: 'completed', featured: false,
-    amenities: [], nearbyLocations: [],
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      title: '', slug: '', projectType: '', propertyTypeSelect: '',
+      propertyTypeCustom: '', subDescription: '', location: '', year: '', featured: false,
+    },
   })
+
+  const [mainDescription, setMainDescription] = useState('')
   const [amenityInput, setAmenityInput] = useState('')
+  const [amenities, setAmenities] = useState([])
+  const [nearbyLocations, setNearbyLocations] = useState([])
   const [coverFile, setCoverFile] = useState(null)
   const [imageFiles, setImageFiles] = useState([])
   const [existingImages, setExistingImages] = useState([])
   const [coverPreview, setCoverPreview] = useState(null)
   const [saving, setSaving] = useState(false)
-  const [error, setError] = useState('')
+  const [serverError, setServerError] = useState('')
+
+  const titleValue = watch('title')
+  const propertyTypeSelect = watch('propertyTypeSelect')
+  const featuredValue = watch('featured')
+
+  useEffect(() => {
+    if (!isEdit && titleValue) {
+      setValue('slug', slugify(titleValue), { shouldValidate: false })
+    }
+  }, [titleValue, isEdit, setValue])
 
   useEffect(() => {
     if (!isEdit) return
-    api.get(`/projects/${id}`).then(({ data }) => {
-      setForm({
-        title: data.title, slug: data.slug, category: data.category,
-        description: data.description || '', location: data.location || '',
-        year: data.year || '', status: data.status, featured: data.featured,
-        amenities: data.amenities || [], nearbyLocations: data.nearbyLocations || [],
+    api.get(`/projects/id/${id}`).then(({ data }) => {
+      const knownType = PROPERTY_TYPES.includes(data.propertyType)
+      reset({
+        title: data.title,
+        slug: data.slug,
+        projectType: data.projectType || '',
+        propertyTypeSelect: knownType ? data.propertyType : (data.propertyType ? 'Other' : ''),
+        propertyTypeCustom: knownType ? '' : (data.propertyType || ''),
+        subDescription: data.subDescription || '',
+        location: data.location || '',
+        year: data.year || '',
+        featured: data.featured,
       })
+      setMainDescription(data.mainDescription || '')
+      setAmenities(data.amenities || [])
+      setNearbyLocations(data.nearbyLocations || [])
       setCoverPreview(data.coverImage?.url || null)
       setExistingImages(data.images || [])
     })
-  }, [id, isEdit])
+  }, [id, isEdit, reset])
 
   const addAmenity = (val) => {
     const v = val.trim()
-    if (!v || form.amenities.includes(v)) return
-    setForm((prev) => ({ ...prev, amenities: [...prev.amenities, v] }))
+    if (!v || amenities.includes(v)) return
+    setAmenities((prev) => [...prev, v])
     setAmenityInput('')
   }
 
-  const removeAmenity = (idx) =>
-    setForm((prev) => ({ ...prev, amenities: prev.amenities.filter((_, i) => i !== idx) }))
+  const removeAmenity = (idx) => setAmenities((prev) => prev.filter((_, i) => i !== idx))
 
   const addNearby = () =>
-    setForm((prev) => ({ ...prev, nearbyLocations: [...prev.nearbyLocations, { name: '', distance: '', type: 'other' }] }))
+    setNearbyLocations((prev) => [...prev, { name: '', distance: '' }])
 
   const updateNearby = (idx, field, value) =>
-    setForm((prev) => ({
-      ...prev,
-      nearbyLocations: prev.nearbyLocations.map((loc, i) => i === idx ? { ...loc, [field]: value } : loc),
-    }))
+    setNearbyLocations((prev) =>
+      prev.map((loc, i) => (i === idx ? { ...loc, [field]: value } : loc))
+    )
 
   const removeNearby = (idx) =>
-    setForm((prev) => ({ ...prev, nearbyLocations: prev.nearbyLocations.filter((_, i) => i !== idx) }))
-
-  const slugify = (str) => str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
-
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target
-    setForm((prev) => ({
-      ...prev,
-      [name]: type === 'checkbox' ? checked : value,
-      ...(name === 'title' && !isEdit ? { slug: slugify(value) } : {}),
-    }))
-  }
+    setNearbyLocations((prev) => prev.filter((_, i) => i !== idx))
 
   const handleCover = (e) => {
     const file = e.target.files[0]
@@ -93,158 +174,389 @@ export default function ProjectFormPage() {
     setCoverPreview(URL.createObjectURL(file))
   }
 
-  const handleImages = (e) => {
-    setImageFiles(Array.from(e.target.files))
-  }
+  const handleImages = (e) => setImageFiles(Array.from(e.target.files))
 
   const removeExistingImage = async (publicId) => {
-    if (!confirm('Remove this image?')) return
+    const ok = await confirm({
+      title: 'Remove this image?',
+      message: 'This will permanently delete the image from the project.',
+    })
+    if (!ok) return
     await api.delete(`/projects/${id}/images`, { data: { publicId } })
     setExistingImages((prev) => prev.filter((i) => i.publicId !== publicId))
+    toast.success('Image removed')
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  const onSubmit = async (data) => {
     setSaving(true)
-    setError('')
-
+    setServerError('')
     try {
+      const propertyType = data.propertyTypeSelect === 'Other'
+        ? data.propertyTypeCustom.trim()
+        : data.propertyTypeSelect
+
       const fd = new FormData()
-      Object.entries(form).forEach(([k, v]) => fd.append(k, v))
+      fd.append('title', data.title)
+      fd.append('slug', data.slug)
+      fd.append('projectType', data.projectType)
+      fd.append('subDescription', data.subDescription || '')
+      fd.append('mainDescription', mainDescription || '')
+      fd.append('location', data.location || '')
+      fd.append('year', data.year || '')
+      fd.append('featured', data.featured)
+      fd.append('amenities', JSON.stringify(amenities))
+      fd.append('nearbyLocations', JSON.stringify(nearbyLocations))
+      if (propertyType) fd.append('propertyType', propertyType)
       if (coverFile) fd.append('coverImage', coverFile)
       imageFiles.forEach((f) => fd.append('images', f))
 
       if (isEdit) {
         await api.put(`/projects/${id}`, fd)
+        toast.success('Project updated')
       } else {
         await api.post('/projects', fd)
+        toast.success('Project created')
       }
       navigate('/admin/projects')
     } catch (err) {
-      setError(err.response?.data?.message || 'Something went wrong')
+      setServerError(err.response?.data?.message || 'Something went wrong')
     } finally {
       setSaving(false)
     }
   }
 
-  const inputClass = 'w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm text-gray-900 focus:border-[#f84d07] focus:outline-none focus:ring-2 focus:ring-[#f84d07]/20'
-  const labelClass = 'block text-xs font-semibold text-gray-600 uppercase tracking-wide mb-1.5'
+  const inp = (field) => [
+    'w-full rounded-xl px-4 py-2.5 text-sm text-[#111] placeholder:text-[#C4C4C4] outline-none focus:ring-2 focus:bg-white border transition-all',
+    errors[field]
+      ? 'bg-red-50 border-red-300 focus:ring-red-500/20'
+      : 'bg-[#F5F5F5] border-transparent focus:ring-[#f84d07]/20 focus:border-[#f84d07]/30',
+  ].join(' ')
+
+  const plainInp = 'w-full bg-[#F5F5F5] rounded-xl px-4 py-2.5 text-sm text-[#111] placeholder:text-[#C4C4C4] outline-none focus:ring-2 focus:ring-[#f84d07]/20 focus:bg-white border border-transparent focus:border-[#f84d07]/30 transition-all'
+  const lbl = 'block text-[11px] font-semibold text-[#6B7280] mb-1.5'
+  const fieldErr = (msg) => msg ? <p className="mt-1.5 text-[11px] text-red-500">{msg}</p> : null
 
   return (
-    <div className="p-8 max-w-3xl">
-      <div className="flex items-center gap-3 mb-8">
-        <button onClick={() => navigate('/admin/projects')} className="text-gray-400 hover:text-gray-600">
-          <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+    <div className="p-6 max-w-6xl">
+      <div className="flex items-center gap-3 mb-6">
+        <button
+          onClick={() => navigate('/admin/projects')}
+          className="h-8 w-8 flex items-center justify-center rounded-xl bg-white border border-[#F0F0F0] text-[#9CA3AF] hover:text-[#f84d07] hover:border-[#f84d07]/30 transition-colors shadow-sm"
+        >
+          <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
         </button>
-        <h1 className="text-2xl font-black text-gray-900">{isEdit ? 'Edit Project' : 'New Project'}</h1>
+        <div>
+          <h1 className="text-xl font-bold text-[#111]">{isEdit ? 'Edit Project' : 'New Project'}</h1>
+          <p className="text-xs text-[#9CA3AF] mt-0.5">{isEdit ? 'Update project details' : 'Fill in the project details below'}</p>
+        </div>
       </div>
 
-      {error && <div className="mb-5 bg-red-50 border border-red-200 text-red-600 text-sm px-4 py-3 rounded-xl">{error}</div>}
+      {serverError && (
+        <div className="mb-5 bg-red-50 border border-red-100 rounded-2xl px-4 py-3 text-xs text-red-500">{serverError}</div>
+      )}
 
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-5">
-          <h2 className="font-bold text-gray-900 text-sm uppercase tracking-wide">Basic Info</h2>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
 
-          <div className="grid grid-cols-2 gap-4">
-            <div className="col-span-2">
-              <label className={labelClass}>Title *</label>
-              <input name="title" required value={form.title} onChange={handleChange} placeholder="Project name" className={inputClass} />
-            </div>
-            <div className="col-span-2">
-              <label className={labelClass}>Slug *</label>
-              <input name="slug" required value={form.slug} onChange={handleChange} placeholder="project-slug" className={inputClass} />
-            </div>
-            <div>
-              <label className={labelClass}>Category *</label>
-              <select name="category" required value={form.category} onChange={handleChange} className={inputClass}>
-                <option value="">Select category</option>
-                {CATEGORIES.map((c) => <option key={c}>{c}</option>)}
-              </select>
-            </div>
-            <div>
-              <label className={labelClass}>Status</label>
-              <select name="status" value={form.status} onChange={handleChange} className={inputClass}>
-                <option value="completed">Completed</option>
-                <option value="ongoing">Ongoing</option>
-              </select>
-            </div>
-            <div>
-              <label className={labelClass}>Location</label>
-              <input name="location" value={form.location} onChange={handleChange} placeholder="Dubai, UAE" className={inputClass} />
-            </div>
-            <div>
-              <label className={labelClass}>Year</label>
-              <input name="year" value={form.year} onChange={handleChange} placeholder="2024" className={inputClass} />
-            </div>
-            <div className="col-span-2">
-              <label className={labelClass}>Description</label>
-              <textarea name="description" rows={4} value={form.description} onChange={handleChange} placeholder="Project description…" className={`${inputClass} resize-none`} />
-            </div>
-            <div className="col-span-2 flex items-center gap-2">
-              <input type="checkbox" id="featured" name="featured" checked={form.featured} onChange={handleChange} className="h-4 w-4 accent-[#f84d07]" />
-              <label htmlFor="featured" className="text-sm font-medium text-gray-700">Mark as featured</label>
-            </div>
-          </div>
-        </div>
+        {/* Row 1 — Basic Info full width */}
+        <Card title="Basic Info">
+            <div className="grid grid-cols-2 gap-4">
 
-        {/* Cover image */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-4">
-          <h2 className="font-bold text-gray-900 text-sm uppercase tracking-wide">Cover Image</h2>
-          {coverPreview && (
-            <img src={coverPreview} alt="cover" className="h-40 w-full object-cover rounded-xl" />
-          )}
-          <label className="flex items-center gap-2 cursor-pointer w-fit">
-            <span className="text-sm font-medium text-[#f84d07] border border-[#f84d07]/30 rounded-xl px-4 py-2 hover:bg-[#f84d07]/5 transition-colors">
-              {coverPreview ? 'Change cover' : 'Upload cover'}
-            </span>
-            <input type="file" accept="image/*" className="hidden" onChange={handleCover} />
-          </label>
-        </div>
+              <div className="col-span-2">
+                <label className={lbl}>Title *</label>
+                <input
+                  placeholder="Project name"
+                  className={inp('title')}
+                  {...register('title', { required: 'Title is required' })}
+                />
+                {fieldErr(errors.title?.message)}
+              </div>
 
-        {/* Gallery images */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-4">
-          <h2 className="font-bold text-gray-900 text-sm uppercase tracking-wide">Gallery Images</h2>
-          {existingImages.length > 0 && (
-            <div className="grid grid-cols-4 gap-3">
-              {existingImages.map((img) => (
-                <div key={img.publicId} className="relative group">
-                  <img src={img.url} alt="" className="h-24 w-full object-cover rounded-xl" />
-                  {isEdit && (
-                    <button
-                      type="button"
-                      onClick={() => removeExistingImage(img.publicId)}
-                      className="absolute top-1 right-1 h-6 w-6 bg-red-500 text-white rounded-full text-xs opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
-                    >
-                      ×
-                    </button>
-                  )}
+              <div className="col-span-2">
+                <label className={lbl}>Slug *</label>
+                <input
+                  placeholder="project-slug"
+                  className={`${inp('slug')} font-mono text-xs`}
+                  {...register('slug', {
+                    required: 'Slug is required',
+                    pattern: {
+                      value: /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
+                      message: 'Only lowercase letters, numbers and hyphens allowed',
+                    },
+                  })}
+                />
+                {fieldErr(errors.slug?.message)}
+              </div>
+
+              <div>
+                <label className={lbl}>Project Type *</label>
+                <select
+                  className={inp('projectType')}
+                  {...register('projectType', { required: 'Project type is required' })}
+                >
+                  <option value="">Select…</option>
+                  {PROJECT_TYPES.map((t) => <option key={t}>{t}</option>)}
+                </select>
+                {fieldErr(errors.projectType?.message)}
+              </div>
+
+              <div>
+                <label className={lbl}>Property Type</label>
+                <select
+                  className={inp('propertyTypeSelect')}
+                  {...register('propertyTypeSelect')}
+                  onChange={(e) => {
+                    setValue('propertyTypeSelect', e.target.value)
+                    if (e.target.value !== 'Other') setValue('propertyTypeCustom', '')
+                  }}
+                >
+                  <option value="">Select…</option>
+                  {PROPERTY_TYPES.map((t) => <option key={t}>{t}</option>)}
+                </select>
+                {propertyTypeSelect === 'Other' && (
+                  <>
+                    <input
+                      placeholder="e.g. Duplex, Penthouse…"
+                      className={`${inp('propertyTypeCustom')} mt-2`}
+                      {...register('propertyTypeCustom', {
+                        validate: (val) =>
+                          propertyTypeSelect !== 'Other' || val?.trim()
+                            ? true
+                            : 'Please specify the property type',
+                      })}
+                    />
+                    {fieldErr(errors.propertyTypeCustom?.message)}
+                  </>
+                )}
+              </div>
+
+              <div>
+                <label className={lbl}>Location</label>
+                <input
+                  placeholder="Dubai, UAE"
+                  className={inp('location')}
+                  {...register('location')}
+                />
+              </div>
+
+              <div>
+                <label className={lbl}>Year</label>
+                <input
+                  placeholder="2024"
+                  className={inp('year')}
+                  {...register('year', {
+                    pattern: {
+                      value: /^\d{4}$/,
+                      message: 'Enter a valid 4-digit year',
+                    },
+                  })}
+                />
+                {fieldErr(errors.year?.message)}
+              </div>
+
+              <div className="col-span-2">
+                <label className={lbl}>Sub Description</label>
+                <textarea
+                  rows={3}
+                  placeholder="Short project summary…"
+                  className={`${inp('subDescription')} resize-none`}
+                  {...register('subDescription')}
+                />
+              </div>
+
+              <div className="col-span-2">
+                <label className="flex items-center gap-2.5 cursor-pointer w-fit group">
+                  <div className={`h-5 w-5 rounded-md flex items-center justify-center border transition-colors ${featuredValue ? 'bg-[#f84d07] border-[#f84d07]' : 'border-[#E0E0E0] group-hover:border-[#f84d07]/40'}`}>
+                    {featuredValue && (
+                      <svg className="h-3 w-3 text-white" fill="none" stroke="currentColor" strokeWidth={3} viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                      </svg>
+                    )}
+                  </div>
+                  <input type="checkbox" {...register('featured')} className="hidden" />
+                  <span className="text-[13px] text-[#6B7280]">Mark as featured</span>
+                </label>
+              </div>
+
+            </div>
+        </Card>
+
+        {/* Main Description — full width */}
+        <Card title="Main Description">
+          <RichEditor value={mainDescription} onChange={setMainDescription} />
+        </Card>
+
+        {/* Amenities + Nearby Locations side by side */}
+        <div className="grid grid-cols-2 gap-5 items-start">
+
+            {/* Amenities */}
+            <Card title="Amenities">
+              <div className="flex gap-2 mb-4">
+                <input
+                  value={amenityInput}
+                  onChange={(e) => setAmenityInput(e.target.value)}
+                  placeholder="Type custom amenity…"
+                  className={plainInp}
+                  onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); addAmenity(amenityInput) } }}
+                />
+                <button
+                  type="button"
+                  onClick={() => addAmenity(amenityInput)}
+                  className="shrink-0 px-4 py-2.5 bg-[#f84d07] hover:bg-[#d94206] text-white text-xs font-semibold rounded-xl transition-colors shadow-sm"
+                >
+                  Add
+                </button>
+              </div>
+
+              <div className="flex flex-wrap gap-2 mb-4">
+                {AMENITY_SUGGESTIONS.map((s) => (
+                  <button
+                    key={s}
+                    type="button"
+                    onClick={() => addAmenity(s)}
+                    disabled={amenities.includes(s)}
+                    className="px-3 py-1.5 rounded-xl text-xs font-medium border transition-colors disabled:opacity-30 disabled:cursor-not-allowed border-[#EBEBEB] text-[#6B7280] hover:border-[#f84d07]/40 hover:text-[#f84d07] hover:bg-[#f84d07]/5"
+                  >
+                    + {s}
+                  </button>
+                ))}
+              </div>
+
+              {amenities.length > 0 && (
+                <div className="flex flex-wrap gap-2 pt-1 border-t border-[#F8F8F8]">
+                  {amenities.map((a, i) => (
+                    <span key={i} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#f84d07]/10 text-[#f84d07] text-xs font-semibold">
+                      {a}
+                      <button type="button" onClick={() => removeAmenity(i)} className="opacity-60 hover:opacity-100 transition-opacity">
+                        <svg className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+                    </span>
+                  ))}
                 </div>
-              ))}
-            </div>
-          )}
-          <label className="flex items-center gap-2 cursor-pointer w-fit">
-            <span className="text-sm font-medium text-[#f84d07] border border-[#f84d07]/30 rounded-xl px-4 py-2 hover:bg-[#f84d07]/5 transition-colors">
-              {imageFiles.length > 0 ? `${imageFiles.length} file(s) selected` : 'Upload images'}
-            </span>
-            <input type="file" accept="image/*" multiple className="hidden" onChange={handleImages} />
-          </label>
+              )}
+            </Card>
+
+            {/* Nearby Locations */}
+            <Card title="Nearby Locations">
+              {nearbyLocations.length > 0 && (
+                <div className="space-y-2.5 mb-4">
+                  <div className="grid grid-cols-[1fr_1fr_auto] gap-2">
+                    {['Place Name', 'Distance', ''].map((h) => (
+                      <span key={h} className={lbl}>{h}</span>
+                    ))}
+                  </div>
+                  {nearbyLocations.map((loc, i) => (
+                    <div key={i} className="grid grid-cols-[1fr_1fr_auto] gap-2 items-center">
+                      <input value={loc.name} onChange={(e) => updateNearby(i, 'name', e.target.value)} placeholder="e.g. City Mall" className={plainInp} />
+                      <input value={loc.distance} onChange={(e) => updateNearby(i, 'distance', e.target.value)} placeholder="e.g. 500m" className={plainInp} />
+                      <button
+                        type="button"
+                        onClick={() => removeNearby(i)}
+                        className="h-9 w-9 flex items-center justify-center rounded-xl text-[#C4C4C4] hover:text-red-500 hover:bg-red-50 transition-colors"
+                      >
+                        <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+              <button
+                type="button"
+                onClick={addNearby}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border-2 border-dashed border-[#E8E8E8] text-xs font-semibold text-[#9CA3AF] hover:border-[#f84d07]/40 hover:text-[#f84d07] hover:bg-[#f84d07]/5 transition-colors"
+              >
+                <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                </svg>
+                Add Location
+              </button>
+            </Card>
+
         </div>
 
-        <div className="flex gap-3">
+        {/* Row 3 — Cover Image + Gallery */}
+        <div className="grid grid-cols-2 gap-5">
+          <Card title="Cover Image">
+            {coverPreview && (
+              <img src={coverPreview} alt="cover" className="h-40 w-full object-cover rounded-xl mb-3 border border-[#F0F0F0]" />
+            )}
+            <label className="inline-flex items-center gap-2 cursor-pointer">
+              <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#f84d07] bg-[#f84d07]/10 hover:bg-[#f84d07]/15 px-4 py-2 rounded-xl transition-colors">
+                <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                </svg>
+                {coverPreview ? 'Change cover' : 'Upload cover'}
+              </span>
+              <input type="file" accept="image/*" className="hidden" onChange={handleCover} />
+            </label>
+          </Card>
+
+          <Card title="Gallery Images">
+            {existingImages.length > 0 && (
+              <div className="grid grid-cols-4 gap-2 mb-3">
+                {existingImages.map((img) => (
+                  <div key={img.publicId} className="relative group">
+                    <img src={img.url} alt="" className="h-20 w-full object-cover rounded-xl border border-[#F0F0F0]" />
+                    {isEdit && (
+                      <button
+                        type="button"
+                        onClick={() => removeExistingImage(img.publicId)}
+                        className="absolute inset-0 flex items-center justify-center bg-black/50 text-white text-[10px] font-semibold rounded-xl opacity-0 group-hover:opacity-100 transition-opacity"
+                      >
+                        Remove
+                      </button>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+            <label className="inline-flex items-center gap-2 cursor-pointer">
+              <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#f84d07] bg-[#f84d07]/10 hover:bg-[#f84d07]/15 px-4 py-2 rounded-xl transition-colors">
+                <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                </svg>
+                {imageFiles.length > 0 ? `${imageFiles.length} selected` : 'Upload images'}
+              </span>
+              <input type="file" accept="image/*" multiple className="hidden" onChange={handleImages} />
+            </label>
+          </Card>
+        </div>
+
+        {/* Submit */}
+        <div className="flex items-center gap-3 pt-2">
           <button
             type="submit"
             disabled={saving}
-            className="bg-[#f84d07] hover:bg-[#d94206] disabled:opacity-60 text-white font-semibold px-7 py-3 rounded-xl transition-colors text-sm"
+            className="bg-[#f84d07] hover:bg-[#d94206] disabled:opacity-50 text-white font-semibold px-7 py-3 rounded-xl text-sm transition-colors shadow-sm"
           >
             {saving ? 'Saving…' : isEdit ? 'Save Changes' : 'Create Project'}
           </button>
-          <button type="button" onClick={() => navigate('/admin/projects')} className="px-7 py-3 rounded-xl border border-gray-200 text-sm font-semibold text-gray-600 hover:bg-gray-50 transition-colors">
+          <button
+            type="button"
+            onClick={() => navigate('/admin/projects')}
+            className="px-7 py-3 rounded-xl bg-white border border-[#F0F0F0] text-sm font-medium text-[#6B7280] hover:text-[#111] hover:border-[#E0E0E0] transition-colors shadow-sm"
+          >
             Cancel
           </button>
         </div>
+
       </form>
+    </div>
+  )
+}
+
+function Card({ title, children }) {
+  return (
+    <div className="bg-white rounded-2xl border border-[#F0F0F0] shadow-sm overflow-hidden">
+      <div className="px-5 py-3.5 border-b border-[#F8F8F8]">
+        <h2 className="text-sm font-semibold text-[#111]">{title}</h2>
+      </div>
+      <div className="p-5">{children}</div>
     </div>
   )
 }

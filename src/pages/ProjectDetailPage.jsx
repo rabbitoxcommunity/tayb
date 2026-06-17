@@ -118,8 +118,8 @@ export default function ProjectDetailPage() {
   const specs = [
     project.location && { label: 'Location', value: project.location },
     project.year && { label: 'Year', value: project.year },
-    project.category && { label: 'Category', value: project.category },
-    { label: 'Status', value: project.status === 'completed' ? 'Completed' : 'Ongoing' },
+    project.projectType && { label: 'Project Type', value: project.projectType },
+    project.propertyType && { label: 'Property Type', value: project.propertyType },
   ].filter(Boolean)
 
   return (
