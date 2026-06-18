@@ -96,6 +96,7 @@ export default function ContactPage() {
         label="Get In Touch"
         title="Contact Us"
         subtitle="We'd love to hear about your project. Reach out and one of our team will respond within one business day."
+        image="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1400&h=700&fit=crop&q=70"
         breadcrumb="Contact"
       />
 

@@ -75,6 +75,7 @@ export default function GalleryPage() {
         label="Visual Story"
         title="Our Gallery"
         subtitle="A curated look at our projects, people, and craftsmanship — from groundbreaking to handover."
+        image="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1400&h=700&fit=crop&q=70"
         breadcrumb="Gallery"
       />
 

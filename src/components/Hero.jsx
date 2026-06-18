@@ -12,39 +12,33 @@ const stats = [
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen overflow-hidden bg-[#f84d07]">
-      {/* Grid overlay */}
-      <div className="absolute inset-0 grid-overlay pointer-events-none" />
-
-      {/* Decorative large faded text */}
-      {/* <motion.div
-        aria-hidden="true"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.4, delay: 0.2 }}
-        className="absolute inset-x-0 top-0 flex justify-center pointer-events-none select-none overflow-hidden"
+    <section className="relative min-h-screen overflow-hidden bg-black">
+      {/* Background Video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 h-full w-full object-cover"
       >
-        <span className="text-[22vw] font-black text-white/[0.06] leading-none tracking-tighter whitespace-nowrap">
-          TAYB
-        </span>
-      </motion.div> */}
+        <source
+          src="https://www.pexels.com/download/video/27607592/"
+          type="video/mp4"
+        />
+      </video>
 
-      {/* ── Right-aligned building image (absolute) ── */}
-      <motion.img
-        src="/bg.png"
-        alt="Modern building"
-        initial={{ opacity: 0, y: 60, scale: 0.95 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ delay: 0.25, duration: 1.2, ease: [0.215, 0.61, 0.355, 1] }}
-        className="absolute right-0 bottom-0 pointer-events-none"
-        style={{ height: '80vh', width: 'auto' }}
-      />
-      {/* White gradient — blends into next section */}
+      {/* Dark overlay for contrast */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/50 to-black/30" />
+
+      {/* Grid overlay */}
+      <div className="absolute inset-0 grid-overlay pointer-events-none opacity-20" />
+
+      {/* Black gradient overlay */}
       <div
         className="absolute bottom-0 left-0 right-0 pointer-events-none"
         style={{
           height: '55%',
-          background: 'linear-gradient(to top, #ffffff 0%, rgba(255,255,255,0.85) 25%, rgba(255,255,255,0.4) 55%, transparent 100%)',
+          background: 'linear-gradient(to top, #000000 0%, rgba(0,0,0,0.85) 25%, rgba(0,0,0,0.4) 55%, transparent 100%)',
         }}
       />
 
@@ -53,10 +47,9 @@ export default function Hero() {
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between flex-1 gap-10 lg:gap-0">
 
           {/* Left content */}
-          <div className="max-w-xl lg:pb-20 xl:pb-28">
+          <div className="max-w-2xl lg:pb-20 xl:pb-28">
 
-
-{/* Headline — SplitText (char by char) */}
+            {/* Headline — SplitText (char by char) */}
             <h1 className="text-[clamp(2.6rem,6.5vw,4.75rem)] font-black text-white leading-[1.0] tracking-tight mb-6 uppercase">
               <SplitText text="Building Strong" delay={0.15} stagger={0.032} once={false} />
               <br />
@@ -64,7 +57,7 @@ export default function Hero() {
             </h1>
 
             {/* Subtitle — BlurText (word by word) */}
-            <p className="text-white/80 text-base sm:text-lg leading-relaxed mb-10 max-w-sm">
+            <p className="text-white/80 text-base sm:text-lg leading-relaxed mb-10 max-w-lg">
               <BlurText
                 text="We deliver durable, high-quality construction services designed to meet your project goals on time."
                 delay={0.9}

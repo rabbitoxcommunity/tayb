@@ -57,7 +57,7 @@ export default function AboutPage() {
         label="Who We Are"
         title="About TayB"
         subtitle="A Dubai-based Indian construction firm providing comprehensive building contracts and end-to-end solutions since 2024."
-        image="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1400&h=700&fit=crop&q=70"
+        image="https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=1400&h=700&fit=crop&q=70"
         breadcrumb="About"
       />
 

@@ -25,6 +25,7 @@ export default function ProjectsPage() {
         label="Portfolio"
         title="Our Projects"
         subtitle="From landmark towers to intimate residences — every project is a story of collaboration and craft."
+        image="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1400&h=700&fit=crop&q=70"
         breadcrumb="Projects"
       />
 
