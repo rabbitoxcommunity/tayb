@@ -68,7 +68,7 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-col gap-6 lg:items-end">
-            <div className="grid grid-cols-2 gap-6 lg:gap-16 w-full lg:max-w-md">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-16 w-full lg:max-w-md">
               <div>
                 <p className="text-[10px] font-bold tracking-[0.24em] uppercase text-[#f84d07] mb-3">
                   Location

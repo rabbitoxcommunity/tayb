@@ -21,10 +21,12 @@ function Logo({ scrolled }) {
       <img
         src="/logo.svg"
         alt="TayB Logo"
-        className="object-contain transition-all duration-300"
+        className={`object-contain transition-all duration-300 ${
+          scrolled 
+            ? 'w-[55px] h-[55px] lg:w-[70px] lg:h-[70px]' 
+            : 'w-[85px] h-[85px] lg:w-[120px] lg:h-[120px]'
+        }`}
         style={{
-          width: scrolled ? '70px' : '120px',
-          height: scrolled ? '70px' : '120px',
           filter: scrolled ? 'none' : 'brightness(0) invert(1)'
         }}
       />
@@ -65,15 +67,15 @@ export default function Navbar() {
       <motion.div
         className="absolute inset-0"
         animate={{
-          backgroundColor: scrolled ? 'rgba(255,255,255,0.97)' : 'rgba(255,255,255,0)',
-          backdropFilter: scrolled ? 'blur(14px)' : 'blur(0px)',
-          boxShadow: scrolled ? '0 1px 24px rgba(0,0,0,0.09)' : '0 0 0 rgba(0,0,0,0)',
+          backgroundColor: (scrolled || mobileOpen) ? 'rgba(255,255,255,0.97)' : 'rgba(255,255,255,0)',
+          backdropFilter: (scrolled || mobileOpen) ? 'blur(14px)' : 'blur(0px)',
+          boxShadow: (scrolled || mobileOpen) ? '0 1px 24px rgba(0,0,0,0.09)' : '0 0 0 rgba(0,0,0,0)',
         }}
         transition={{ duration: 0.3, ease: 'easeOut' }}
       />
 
       <nav className="relative mx-auto flex max-w-7xl items-center justify-between px-5 sm:px-6 lg:px-8 py-4 lg:py-5">
-        <Logo scrolled={scrolled} />
+        <Logo scrolled={scrolled || mobileOpen} />
 
         {/* Desktop links */}
         <ul className="hidden lg:flex items-center gap-8">
@@ -105,7 +107,7 @@ export default function Navbar() {
           </Link>
 
           <button
-            className={`lg:hidden p-1 transition-colors duration-200 ${scrolled ? 'text-gray-800' : 'text-white'}`}
+            className={`lg:hidden p-1 transition-colors duration-200 ${(scrolled || mobileOpen) ? 'text-gray-800' : 'text-white'}`}
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >

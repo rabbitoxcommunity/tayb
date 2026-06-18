@@ -12,7 +12,7 @@ const stats = [
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen overflow-hidden bg-transparent">
+    <section className="relative min-h-[80vh] lg:min-h-screen overflow-hidden bg-transparent">
       {/* Background Video */}
       <video
         autoPlay
@@ -44,8 +44,8 @@ export default function Hero() {
       />
 
       {/* ── Foreground content ── */}
-      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 pt-28 sm:pt-32 lg:pt-36 pb-0 min-h-screen flex flex-col">
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between flex-1 gap-10 lg:gap-0">
+      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 pt-20 sm:pt-32 lg:pt-36 pb-6 lg:pb-0 min-h-[80vh] lg:min-h-screen flex flex-col justify-center">
+        <div className="flex flex-col justify-center lg:flex-row lg:items-end lg:justify-between flex-1 gap-6 lg:gap-0">
 
           {/* Left content */}
           <div className="max-w-2xl lg:pb-20 xl:pb-28">

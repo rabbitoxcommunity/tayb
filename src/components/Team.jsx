@@ -5,12 +5,6 @@ import RevealText from '../animations/RevealText'
 
 const team = [
   {
-    name: 'Navas Meeran',
-    role: 'Chairman',
-    image: '/chairman.jpg',
-    message: 'Meeran Group has always believed in providing the finest quality products and services at the most affordable prices. Through Nanma we now extend the goodness in the construction sector.',
-  },
-  {
     name: 'Asheen Panakkat',
     role: 'Managing Director',
     image: '/md.jpg',
@@ -55,7 +49,7 @@ export default function Team() {
         </div>
 
         {/* Team grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {team.map((member, i) => (
             <motion.div
               key={i}
