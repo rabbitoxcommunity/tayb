@@ -20,11 +20,11 @@ const team = [
 
 export default function Team() {
   return (
-    <section className="relative bg-white py-20 lg:py-28">
+    <section className="relative bg-white py-20 lg:py-28 overflow-hidden">
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
 
         {/* Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-14">
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16">
           <div>
             <div className="mb-3">
               <RevealText>
@@ -48,44 +48,38 @@ export default function Team() {
           </p>
         </div>
 
-        {/* Team grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        {/* Team Grid - Modern Minimal Design */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-4xl mt-16">
           {team.map((member, i) => (
             <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 40 }}
+              key={member.name}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-6%' }}
-              transition={{ duration: 0.55, delay: i * 0.1, ease: [0.215, 0.61, 0.355, 1] }}
-              className="group relative overflow-hidden rounded-2xl bg-gray-100 shadow-sm"
+              viewport={{ once: true, margin: '-5%' }}
+              transition={{ duration: 0.6, delay: i * 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="group flex flex-col relative"
             >
-              {/* Image */}
-              <div className="aspect-[3/4] overflow-hidden">
+              {/* Image Frame */}
+              <div className="overflow-hidden rounded-[2rem] aspect-[4/5] bg-gray-50 relative shadow-sm border border-gray-100/50">
                 <img
                   src={member.image}
                   alt={member.name}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-              </div>
-
-              {/* Normal State Bottom Label */}
-              <div className="absolute bottom-0 inset-x-0 p-5 group-hover:opacity-0 transition-opacity duration-300">
-                <div className="rounded-xl bg-white px-4 py-3 shadow-md">
-                  <p className="font-bold text-gray-900 text-sm">{member.name}</p>
-                  <p className="text-xs text-gray-500">{member.role}</p>
-                </div>
-              </div>
-
-              {/* Hover Overlay with Quote/Message */}
-              <div className="absolute inset-0 bg-[#f84d07]/95 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-300 ease-out">
-                  <p className="text-white text-sm sm:text-xs xl:text-sm leading-relaxed italic mb-5">
+                
+                {/* Floating Minimal Detail Card */}
+                <div className="absolute bottom-6 inset-x-6 bg-white/95 backdrop-blur-md p-6 rounded-2xl border border-white/20 shadow-md transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                  <span className="inline-block bg-[#f84d07]/10 text-[#f84d07] text-[9px] font-bold tracking-[0.2em] uppercase px-2.5 py-1 rounded-md">
+                    {member.role}
+                  </span>
+                  
+                  <h4 className="text-lg font-black text-gray-900 uppercase tracking-tight mt-3">
+                    {member.name}
+                  </h4>
+                  
+                  <p className="text-xs text-gray-500 leading-relaxed mt-2.5 italic border-l border-gray-200 pl-3">
                     "{member.message}"
                   </p>
-                  <div className="border-t border-white/20 pt-3">
-                    <p className="font-bold text-white text-base">{member.name}</p>
-                    <p className="text-xs text-white/80 uppercase tracking-wider font-semibold mt-0.5">{member.role}</p>
-                  </div>
                 </div>
               </div>
             </motion.div>
