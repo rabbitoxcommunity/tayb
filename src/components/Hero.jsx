@@ -19,6 +19,7 @@ export default function Hero() {
         loop
         muted
         playsInline
+        poster="/poster.webp"
         className="absolute inset-0 h-full w-full object-cover"
       >
         <source
