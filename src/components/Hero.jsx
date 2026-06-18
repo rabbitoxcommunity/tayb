@@ -12,7 +12,7 @@ const stats = [
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen overflow-hidden bg-black">
+    <section className="relative min-h-screen overflow-hidden bg-transparent">
       {/* Background Video */}
       <video
         autoPlay
@@ -22,7 +22,7 @@ export default function Hero() {
         className="absolute inset-0 h-full w-full object-cover"
       >
         <source
-          src="https://www.pexels.com/download/video/27607592/"
+          src="/bg-video.mp4"
           type="video/mp4"
         />
       </video>
