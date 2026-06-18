@@ -23,6 +23,24 @@ export default function GalleryPage() {
   const handleUpload = async (e) => {
     const files = Array.from(e.target.files)
     if (!files.length) return
+
+    // 1. Check max files limit (30)
+    if (files.length > 30) {
+      toast.error('You can only upload a maximum of 30 images at a time.')
+      fileRef.current.value = ''
+      return
+    }
+
+    // 2. Check each file size limit (10MB)
+    const MAX_SIZE = 10 * 1024 * 1024 // 10MB
+    const oversized = files.filter((f) => f.size > MAX_SIZE)
+    if (oversized.length > 0) {
+      const names = oversized.map((f) => f.name).join(', ')
+      toast.error(`Please reduce the image file size. The following files exceed the 10MB limit: ${names}`)
+      fileRef.current.value = ''
+      return
+    }
+
     setUploading(true)
     const fd = new FormData()
     files.forEach((f) => fd.append('images', f))
@@ -32,8 +50,9 @@ export default function GalleryPage() {
       fetchImages()
       fileRef.current.value = ''
       toast.success(`${files.length} image${files.length > 1 ? 's' : ''} uploaded`)
-    } catch {
-      toast.error('Upload failed. Please try again.')
+    } catch (err) {
+      const errMsg = err.response?.data?.message || err.response?.data?.error || 'Upload failed. Please try again.'
+      toast.error(errMsg)
     } finally {
       setUploading(false)
     }

@@ -11,19 +11,19 @@ function AmenityIcon({ name }) {
   const s = { fill: 'none', stroke: 'currentColor', strokeWidth: 2, viewBox: '0 0 24 24' }
 
   if (n.includes('pool') || n.includes('swim'))
-    return <svg className={cls} {...s}><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z" /></svg>
+    return <svg className={cls} {...s}><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12c0-1.242 1.343-2.25 3-2.25s3 1.008 3 2.25 1.343 2.25 3 2.25 3-1.008 3-2.25S15.593 9.75 17.25 9.75s3 1.008 3 2.25m-18 3.75c0-1.242 1.343-2.25 3-2.25s3 1.008 3 2.25 1.343 2.25 3 2.25 3-1.008 3-2.25 1.343-2.25 3-2.25 3 1.008 3 2.25m-18 3.75c0-1.242 1.343-2.25 3-2.25s3 1.008 3 2.25 1.343 2.25 3 2.25 3-1.008 3-2.25 1.343-2.25 3-2.25 3 1.008 3 2.25" /></svg>
 
   if (n.includes('gym') || n.includes('fitness') || n.includes('workout'))
-    return <svg className={cls} {...s}><path strokeLinecap="round" strokeLinejoin="round" d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3" /></svg>
+    return <svg className={cls} {...s}><path strokeLinecap="round" strokeLinejoin="round" d="M6.5 6.5l3.5 3.5M14 14l3.5 3.5M14.5 9.5l-3.5 3.5M9.5 14.5l-3.5 3.5M18 6l2 2M2 20l2 2M16 4l4 4M4 16l4 4 M8 8l8 8M14 6l4 4M2 12l2 2M20 10l2 2" /></svg>
 
-  if (n.includes('park') || n.includes('garage') || n.includes('car'))
+  if (n.includes('parking') || n.includes('garage') || n.includes('car'))
     return <svg className={cls} {...s}><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" /></svg>
 
   if (n.includes('security') || n.includes('cctv') || n.includes('surveillance') || n.includes('guard'))
     return <svg className={cls} {...s}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
 
-  if (n.includes('garden') || n.includes('landscape') || n.includes('green') || n.includes('park'))
-    return <svg className={cls} {...s}><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /></svg>
+  if (n.includes('garden') || n.includes('landscape') || n.includes('green') || n.includes('park') || n.includes('lawn'))
+    return <svg className={cls} {...s}><path strokeLinecap="round" strokeLinejoin="round" d="M11 20A12 12 0 0 0 20 11C20 6.03 15.97 2 11 2C6.03 2 2 6.03 2 11C2 15.97 6.03 20 11 20ZM11 20V11M11 11L20 11" /></svg>
 
   if (n.includes('lift') || n.includes('elevator'))
     return <svg className={cls} {...s}><path strokeLinecap="round" strokeLinejoin="round" d="M3 7.5L7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5" /></svg>
@@ -68,10 +68,10 @@ function AmenityIcon({ name }) {
     return <svg className={cls} {...s}><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /></svg>
 
   if (n.includes('ev') || n.includes('electric') || n.includes('charging') || n.includes('plug'))
-    return <svg className={cls} {...s}><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
+    return <svg className={cls} {...s}><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 3v1.5M15.75 3v1.5m-7.5 10.5h7.5A2.25 2.25 0 0018 12.75v-3a2.25 2.25 0 00-2.25-2.25H8.25A2.25 2.25 0 006 9.75v3A2.25 2.25 0 008.25 15.75zM12 15.75v4.5a2.25 2.25 0 004.5 0v-1.125" /></svg>
 
   if (n.includes('pet') || n.includes('dog') || n.includes('animal'))
-    return <svg className={cls} {...s}><path strokeLinecap="round" strokeLinejoin="round" d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75A2.25 2.25 0 0116.5 4.5c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23H5.904M14.25 9h2.25M5.904 18.729c.11.27.263.positive.434.545a.75.75 0 01-.15 1.017 2.25 2.25 0 01-3.182-3.182.75.75 0 011.017-.15c.179.171.33.324.545.434l1.336 1.336z" /></svg>
+    return <svg className={cls} {...s}><path strokeLinecap="round" strokeLinejoin="round" d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75A2.25 2.25 0 0116.5 4.5c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23H5.904M14.25 9h2.25M5.904 18.729c.11.27.263.29.434.545a.75.75 0 01-.15 1.017 2.25 2.25 0 01-3.182-3.182.75.75 0 011.017-.15c.179.171.33.324.545.434l1.336 1.336z" /></svg>
 
   if (n.includes('intercom') || n.includes('phone') || n.includes('video door'))
     return <svg className={cls} {...s}><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" /></svg>
@@ -83,7 +83,10 @@ function AmenityIcon({ name }) {
     return <svg className={cls} {...s}><path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" /></svg>
 
   if (n.includes('rainwater') || n.includes('harvest') || n.includes('eco') || n.includes('sustain'))
-    return <svg className={cls} {...s}><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /></svg>
+    return <svg className={cls} {...s}><path strokeLinecap="round" strokeLinejoin="round" d="M12 21a6 6 0 01-6-6c0-3.8 6-11 6-11s6 7.2 6 11a6 6 0 01-6 6z" /></svg>
+
+  if (n.includes('waste') || n.includes('trash') || n.includes('garbage') || n.includes('recycle') || n.includes('manage'))
+    return <svg className={cls} {...s}><path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" /></svg>
 
   if (n.includes('shopping') || n.includes('mall') || n.includes('retail') || n.includes('store'))
     return <svg className={cls} {...s}><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
@@ -286,19 +289,20 @@ export default function ProjectDetailPage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-5%' }}
                     transition={{ duration: 0.35, delay: i * 0.06 }}
-                    className="flex items-center justify-between px-5 py-4 border border-gray-100 rounded-xl group"
+                    className="flex items-center justify-between px-5 py-4 border border-gray-100 rounded-xl group hover:border-[#f84d07]/20 hover:shadow-sm transition-all"
                   >
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3 min-w-0 flex-1">
                       <div className="h-8 w-8 rounded-lg bg-[#f84d07] flex items-center justify-center shrink-0">
                         <svg className="h-4 w-4 text-white" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0zM19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                         </svg>
                       </div>
-                      <span className="text-sm font-semibold text-gray-900">{loc.name}</span>
-                    </div>
-                    <div className="text-right shrink-0 ml-4">
-                      <p className="text-sm font-bold text-[#f84d07]">{loc.distance}</p>
-                      <p className="text-[10px] text-gray-400 uppercase tracking-wider mt-0.5">away</p>
+                      <div className="min-w-0 flex-1">
+                        <span className="text-sm font-semibold text-gray-900 leading-snug break-words block">{loc.name}</span>
+                        <p className="text-[10px] text-gray-400 uppercase tracking-wider mt-0.5">
+                          Approx. <span className="text-[#f84d07] font-bold">{loc.distance}</span>
+                        </p>
+                      </div>
                     </div>
                   </motion.div>
                 ))}

@@ -176,11 +176,41 @@ export default function ProjectFormPage() {
   const handleCover = (e) => {
     const file = e.target.files[0]
     if (!file) return
+
+    // Check size limit (10MB)
+    const MAX_SIZE = 10 * 1024 * 1024 // 10MB
+    if (file.size > MAX_SIZE) {
+      toast.error('Please reduce the image file size. Cover image exceeds the 10MB limit.')
+      e.target.value = ''
+      return
+    }
+
     setCoverFile(file)
     setCoverPreview(URL.createObjectURL(file))
   }
 
-  const handleImages = (e) => setImageFiles(Array.from(e.target.files))
+  const handleImages = (e) => {
+    const files = Array.from(e.target.files)
+
+    // 1. Check max files limit (30)
+    if (files.length > 30) {
+      toast.error('You can only upload a maximum of 30 images at a time.')
+      e.target.value = ''
+      return
+    }
+
+    // 2. Check each file size limit (10MB)
+    const MAX_SIZE = 10 * 1024 * 1024 // 10MB
+    const oversized = files.filter((f) => f.size > MAX_SIZE)
+    if (oversized.length > 0) {
+      const names = oversized.map((f) => f.name).join(', ')
+      toast.error(`Please reduce the image file size. The following files exceed the 10MB limit: ${names}`)
+      e.target.value = ''
+      return
+    }
+
+    setImageFiles(files)
+  }
 
   const removeExistingImage = async (publicId) => {
     const ok = await confirm({
