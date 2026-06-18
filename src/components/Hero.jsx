@@ -38,7 +38,7 @@ export default function Hero() {
         className="absolute bottom-0 left-0 right-0 pointer-events-none"
         style={{
           height: '55%',
-          background: 'linear-gradient(to top, #000000 0%, rgba(0,0,0,0.85) 25%, rgba(0,0,0,0.4) 55%, transparent 100%)',
+          background: 'linear-gradient(to top, #000000 0%, rgba(0,0,0,0.85) 5%, rgba(0,0,0,0.4) 55%, transparent 100%)',
         }}
       />
 
