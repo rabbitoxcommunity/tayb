@@ -48,19 +48,19 @@ export default function Hero() {
         <div className="flex flex-col justify-center lg:flex-row lg:items-end lg:justify-between flex-1 gap-6 lg:gap-0">
 
           {/* Left content */}
-          <div className="max-w-2xl lg:pb-20 xl:pb-28">
+          <div className="max-w-xl lg:pb-20 xl:pb-28">
 
             {/* Headline — SplitText (char by char) */}
             <h1 className="text-[clamp(2.6rem,6.5vw,4.75rem)] font-black text-white leading-[1.0] tracking-tight mb-6 uppercase">
-              <SplitText text="Building Strong" delay={0.15} stagger={0.032} once={false} />
+              <SplitText text="Your Dream Our Mission" delay={0.15} stagger={0.032} once={false} />
               <br />
-              <SplitText text="Foundation" delay={0.55} stagger={0.042} once={false} />
+              <SplitText text="Real Results" delay={0.55} stagger={0.042} once={false} />
             </h1>
 
             {/* Subtitle — BlurText (word by word) */}
             <p className="text-white/80 text-base sm:text-lg leading-relaxed mb-10 max-w-lg">
               <BlurText
-                text="We deliver durable, high-quality construction services designed to meet your project goals on time."
+                text="A leading contracting division with expertise in construction, engineering, technology, and facilities management."
                 delay={0.9}
                 stagger={0.055}
                 duration={0.6}

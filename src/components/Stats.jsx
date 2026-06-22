@@ -4,7 +4,7 @@ const stats = [
   { value: 79, label: 'Nanma Lotus Units', desc: 'Flagship residential project under execution in Dubai South' },
   { value: 200, suffix: '+', label: 'Dedicated Labourers', desc: 'Skilled workforce based out of India' },
   { value: 15, suffix: 'M', prefix: 'AED ', label: 'Projected Turnover', desc: 'Reflecting our capacity for complex projects' },
-  { value: 2024, label: 'Year Founded', desc: 'Dubai-based Indian building construction contractor' },
+  { value: 2024, label: 'Year Founded', desc: 'Dubai-based building construction contractor' },
 ]
 
 function Counter({ target, suffix, prefix }) {

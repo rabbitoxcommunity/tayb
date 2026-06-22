@@ -55,7 +55,7 @@ export default function About() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
               <p className="text-sm text-gray-400 leading-relaxed">
                 <BlurText
-                  text="Started in the year 2024, we are a Dubai-based Indian construction firm specializing in the execution of comprehensive building contracts. We provide end-to-end construction solutions for developers, institutional builders, and private clients looking to bring sophisticated architectural visions to life."
+                  text="Started in the year 2024, we are a Dubai-based construction firm specializing in the execution of comprehensive building contracts. We provide end-to-end construction solutions for developers, institutional builders, and private clients looking to bring sophisticated architectural visions to life."
                   stagger={0.035}
                   duration={0.5}
                 />

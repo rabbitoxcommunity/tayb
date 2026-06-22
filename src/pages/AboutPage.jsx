@@ -56,7 +56,7 @@ export default function AboutPage() {
       <PageHero
         label="Who We Are"
         title="About TayB"
-        subtitle="A Dubai-based Indian construction firm providing comprehensive building contracts and end-to-end solutions since 2024."
+        subtitle="A Dubai-based construction firm providing comprehensive building contracts and end-to-end solutions since 2024."
         image="https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=1400&h=700&fit=crop&q=70"
         breadcrumb="About"
       />
@@ -75,7 +75,7 @@ export default function AboutPage() {
 
             <div className="space-y-5 text-sm text-gray-400 leading-relaxed">
               <p>
-                <BlurText text="Started in the year 2024, we are a Dubai-based Indian construction firm specializing in the execution of comprehensive building contracts. We provide end-to-end construction solutions for developers, institutional builders, and private clients looking to bring sophisticated architectural visions to life within the UAE’s dynamic landscape." stagger={0.025} />
+                <BlurText text="Started in the year 2024, we are a Dubai-based construction firm specializing in the execution of comprehensive building contracts. We provide end-to-end construction solutions for developers, institutional builders, and private clients looking to bring sophisticated architectural visions to life within the UAE’s dynamic landscape." stagger={0.025} />
               </p>
               <p>
                 <BlurText text="Our commitment to excellence is best demonstrated through our active project site. We are currently collaborating with Nanma Properties on their flagship development: Nanma Lotus based in Dubai South. This is a residential project comprising 79 units and is designed as B + G + 6 + Roof (Basement, Ground Floor, Six Residential floors, and a Rooftop area)." stagger={0.025} delay={0.1} />
