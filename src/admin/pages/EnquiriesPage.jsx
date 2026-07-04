@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import api from '../api/axios'
+import { useConfirm } from '../contexts/ConfirmContext'
 
 const STATUS_OPTIONS = ['all', 'new', 'read', 'replied']
 const dotColor = { new: 'bg-[#f84d07]', read: 'bg-blue-400', replied: 'bg-emerald-400' }
@@ -14,6 +15,8 @@ export default function EnquiriesPage() {
   const [filter, setFilter] = useState('all')
   const [selected, setSelected] = useState(null)
   const [loading, setLoading] = useState(true)
+
+  const confirm = useConfirm()
 
   const fetchEnquiries = () => {
     setLoading(true)
@@ -30,7 +33,11 @@ export default function EnquiriesPage() {
   }
 
   const handleDelete = async (id) => {
-    if (!confirm('Delete this enquiry?')) return
+    const ok = await confirm({
+      title: 'Delete this enquiry?',
+      message: 'This will permanently remove the enquiry.',
+    })
+    if (!ok) return
     await api.delete(`/enquiries/${id}`)
     setEnquiries((prev) => prev.filter((e) => e._id !== id))
     if (selected?._id === id) setSelected(null)
